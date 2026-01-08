@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Story India - Read Story</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    h2 {
+      color: #e53935;
+    }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: white;
+      background: #e53935;
+      padding: 10px 15px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2 id="title">Story</h2>
+  <p id="content">Loading...</p>
+
+  <a href="index.html">⬅ Back</a>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const type = params.get("type");
+
+  const stories = {
+    history: {
+      title: "ऐतिहासिक कहानी",
+      text: "यह भारत के गौरवशाली इतिहास की एक प्रेरणादायक कहानी है।"
+    },
+    bhakti: {
+      title: "भक्ति कथा",
+      text: "यह कथा भगवान की असीम कृपा और सच्ची श्रद्धा पर आधारित है।"
+    },
+    motivational: {
+      title: "प्रेरणादायक कहानी",
+      text: "संघर्ष और मेहनत से सफलता पाने की एक सच्ची कहानी।"
+    }
+  };
+
+  if (stories[type]) {
+    document.getElementById("title").innerText = stories[type].title;
+    document.getElementById("content").innerText = stories[type].text;
+  } else {
+    document.getElementById("content").innerText = "Story not found.";
+  }
+</script>
+
+</body>
+</html>
