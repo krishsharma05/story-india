@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Story India</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+    }
+    header {
+      background: #e53935;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
+    }
+    .container {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .card h3 {
+      margin-bottom: 10px;
+    }
+    .card p {
+      color: #555;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background: #e53935;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<header>Story India</header>
+
+<div class="container">
+
+  <div class="card">
+    <h3>ऐतिहासिक कहानी</h3>
+    <p>भारत का गौरवशाली इतिहास</p>
+    <a href="story.html?type=history" class="btn">Read Story</a>
+  </div>
+
+  <div class="card">
+    <h3>भक्ति कथा</h3>
+    <p>भगवान की कृपा की कहानी</p>
+    <a href="story.html?type=bhakti" class="btn">Read Story</a>
+  </div>
+
+  <div class="card">
+    <h3>प्रेरणादायक कहानी</h3>
+    <p>संघर्ष से सफलता तक</p>
+    <a href="story.html?type=motivational" class="btn">Read Story</a>
+  </div>
+
+</div>
+
+</body>
+</html>
