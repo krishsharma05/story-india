@@ -1,76 +1,145 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <title>Story India</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f5f5f5;
-    }
-    header {
-      background: #e53935;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 22px;
-    }
-    .container {
-      padding: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      text-align: center;
-    }
-    .card h3 {
-      margin-bottom: 10px;
-    }
-    .card p {
-      color: #555;
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 15px;
-      background: #e53935;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Story India</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f4f4f4;
+}
+
+/* Header */
+.header{
+  background:#e53935;
+  color:white;
+  padding:15px;
+  text-align:center;
+  font-size:22px;
+}
+
+/* Pages */
+.page{
+  display:none;
+  padding:15px;
+}
+.page.active{
+  display:block;
+}
+
+/* Cards */
+.card{
+  background:white;
+  padding:15px;
+  margin-bottom:15px;
+  border-radius:10px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.2);
+}
+.card h3{
+  margin:0 0 10px;
+}
+.btn{
+  display:inline-block;
+  padding:8px 12px;
+  background:#e53935;
+  color:white;
+  text-decoration:none;
+  border-radius:5px;
+}
+
+/* Bottom Nav */
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:white;
+  display:flex;
+  border-top:1px solid #ccc;
+}
+.nav button{
+  flex:1;
+  padding:10px;
+  border:none;
+  background:none;
+  font-size:14px;
+}
+.nav button.active{
+  color:#e53935;
+  font-weight:bold;
+}
+</style>
 </head>
+
 <body>
 
-<header>Story India</header>
+<div class="header">Story India</div>
 
-<div class="container">
-
+<!-- STORIES -->
+<div id="stories" class="page active">
   <div class="card">
     <h3>ऐतिहासिक कहानी</h3>
     <p>भारत का गौरवशाली इतिहास</p>
-    <a href="story.html?type=history" class="btn">Read Story</a>
+    <a class="btn" href="story.html?type=history">Read Story</a>
   </div>
 
   <div class="card">
     <h3>भक्ति कथा</h3>
-    <p>भगवान की कृपा की कहानी</p>
-    <a href="story.html?type=bhakti" class="btn">Read Story</a>
+    <p>श्रद्धा और विश्वास की कहानी</p>
+    <a class="btn" href="story.html?type=bhakti">Read Story</a>
   </div>
 
   <div class="card">
     <h3>प्रेरणादायक कहानी</h3>
-    <p>संघर्ष से सफलता तक</p>
-    <a href="story.html?type=motivational" class="btn">Read Story</a>
+    <p>संघर्ष से सफलता</p>
+    <a class="btn" href="story.html?type=motivational">Read Story</a>
   </div>
-
 </div>
+
+<!-- VIDEOS -->
+<div id="videos" class="page">
+  <div class="card">
+    <h3>🎥 Videos</h3>
+    <p>Yahan future me videos aayengi</p>
+  </div>
+</div>
+
+<!-- REELS -->
+<div id="reels" class="page">
+  <div class="card">
+    <h3>🎬 Reels</h3>
+    <p>Short reels yahan show hongi</p>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div id="profile" class="page">
+  <div class="card">
+    <h3>👤 Profile</h3>
+    <p>Login / Sign-up next step me</p>
+  </div>
+</div>
+
+<!-- Bottom Navigation -->
+<div class="nav">
+  <button class="active" onclick="showPage('stories',this)">Stories</button>
+  <button onclick="showPage('videos',this)">Videos</button>
+  <button onclick="showPage('reels',this)">Reels</button>
+  <button onclick="showPage('profile',this)">Profile</button>
+</div>
+
+<script>
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
 
 </body>
 </html>
