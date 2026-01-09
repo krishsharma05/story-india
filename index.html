@@ -5,76 +5,19 @@
 <title>Story India</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body {
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:#f4f4f4;
-}
-.header {
-  background:#e53935;
-  color:#fff;
-  padding:14px;
-  text-align:center;
-  font-size:22px;
-}
-.page{display:none; padding:15px; padding-bottom:80px;}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f4f4;}
+.header{background:#e53935;color:#fff;padding:14px;text-align:center;font-size:22px;}
+.page{display:none;padding:15px;padding-bottom:80px;}
 .page.active{display:block;}
-.card{
-  background:#fff;
-  padding:15px;
-  margin-bottom:15px;
-  border-radius:12px;
-  box-shadow:0 2px 6px rgba(0,0,0,.2);
-}
+.card{background:#fff;padding:15px;margin-bottom:15px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.2);}
 .card h3{margin:0 0 10px;}
-.btn{
-  display:inline-block;
-  padding:8px 12px;
-  background:#e53935;
-  color:#fff;
-  text-decoration:none;
-  border-radius:6px;
-}
-video{
-  width:100%;
-  border-radius:10px;
-}
-
-/* Reels Buttons */
-.reel-buttons button{
-  flex:1;
-  margin:0 5px;
-  padding:8px;
-  border:none;
-  border-radius:5px;
-  color:#fff;
-  font-weight:bold;
-}
-.reel-buttons .like{background:#e53935;}
-.reel-buttons .comment{background:#039be5;}
-.reel-buttons .share{background:#43a047;}
+.btn{display:inline-block;padding:8px 12px;background:#e53935;color:#fff;text-decoration:none;border-radius:6px;}
+video{width:100%;border-radius:10px;}
 
 /* Bottom Nav */
-.nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  background:#fff;
-  display:flex;
-  border-top:1px solid #ccc;
-}
-.nav button{
-  flex:1;
-  padding:10px;
-  border:none;
-  background:none;
-  font-size:14px;
-}
-.nav button.active{
-  color:#e53935;
-  font-weight:bold;
-}
+.nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;border-top:1px solid #ccc;}
+.nav button{flex:1;padding:10px;border:none;background:none;font-size:14px;}
+.nav button.active{color:#e53935;font-weight:bold;}
 .spacer{height:70px;}
 </style>
 </head>
@@ -89,13 +32,11 @@ video{
     <p>भारत का गौरवशाली इतिहास</p>
     <a class="btn" href="story.html?type=history">Read Story</a>
   </div>
-
   <div class="card">
     <h3>भक्ति कथा</h3>
     <p>श्रद्धा और विश्वास</p>
     <a class="btn" href="story.html?type=bhakti">Read Story</a>
   </div>
-
   <div class="card">
     <h3>प्रेरणादायक कहानी</h3>
     <p>संघर्ष से सफलता</p>
@@ -116,32 +57,8 @@ video{
   <div class="spacer"></div>
 </div>
 
-<!-- REELS -->
-<div id="reels" class="page">
-  <div class="card">
-    <h3>Story India Reel</h3>
-    
-    <!-- 9:16 Vertical Video -->
-    <div style="position:relative; width:100%; padding-top:177.78%; border-radius:10px; overflow:hidden; background:#000;">
-      <video controls style="position:absolute; top:0; left:0; width:100%; height:100%;">
-        <source src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4" type="video/mp4">
-        आपका ब्राउज़र वीडियो सपोर्ट नहीं करता।
-      </video>
-    </div>
-
-    <!-- Caption -->
-    <p style="margin-top:8px; font-weight:bold;">💬 Caption: भारत की प्रेरणादायक कहानी</p>
-
-    <!-- Like / Comment / Share Buttons -->
-    <div class="reel-buttons" style="display:flex; justify-content:space-between; margin-top:10px;">
-      <button class="like">👍 Like</button>
-      <button class="comment">💬 Comment</button>
-      <button class="share">🔗 Share</button>
-    </div>
-
-  </div>
-  <div class="spacer"></div>
-</div>
+<!-- REELS (Instagram-style) -->
+<div id="reels" class="page" style="overflow:hidden; height:100vh; position:relative; background:#000;"></div>
 
 <!-- PROFILE -->
 <div id="profile" class="page">
@@ -161,6 +78,7 @@ video{
 </div>
 
 <script>
+// Bottom nav
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -168,17 +86,73 @@ function showPage(id,btn){
   btn.classList.add('active');
 }
 
-// Optional: Like / Comment / Share dummy actions
-document.querySelectorAll('.like').forEach(b=>{
-  b.addEventListener('click',()=>alert('You liked this reel!'));
-});
-document.querySelectorAll('.comment').forEach(b=>{
-  b.addEventListener('click',()=>alert('Comment feature coming soon!'));
-});
-document.querySelectorAll('.share').forEach(b=>{
-  b.addEventListener('click',()=>alert('Share feature coming soon!'));
-});
-</script>
+// 🌟 Reels Data
+const reels = [
+  {url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4",caption:"💬 भारत की प्रेरणादायक कहानी"},
+  {url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4",caption:"💬 भक्ति और श्रद्धा की कहानी"}
+];
 
+let currentReel = 0;
+const reelsContainer = document.getElementById('reels');
+
+function createReel(reelData){
+  const reelDiv = document.createElement('div');
+  reelDiv.style.position="absolute"; reelDiv.style.top="0"; reelDiv.style.left="0";
+  reelDiv.style.width="100%"; reelDiv.style.height="100%"; reelDiv.style.display="flex";
+  reelDiv.style.flexDirection="column"; reelDiv.style.justifyContent="flex-end"; reelDiv.style.background="#000";
+
+  const video=document.createElement('video');
+  video.src=reelData.url; video.type="video/mp4"; video.autoplay=true; video.muted=false;
+  video.controls=false; video.loop=true; video.style.width="100%"; video.style.height="100%"; video.style.objectFit="cover";
+  reelDiv.appendChild(video);
+
+  const caption=document.createElement('div');
+  caption.innerText=reelData.caption; caption.style.position="absolute"; caption.style.bottom="80px";
+  caption.style.left="15px"; caption.style.color="#fff"; caption.style.fontSize="18px"; caption.style.fontWeight="bold";
+  caption.style.textShadow="1px 1px 5px #000"; reelDiv.appendChild(caption);
+
+  const buttonsDiv=document.createElement('div');
+  buttonsDiv.style.position="absolute"; buttonsDiv.style.bottom="20px"; buttonsDiv.style.right="15px";
+  buttonsDiv.style.display="flex"; buttonsDiv.style.flexDirection="column"; buttonsDiv.style.gap="10px";
+
+  const likeBtn=document.createElement('button'); likeBtn.innerText="👍"; likeBtn.style.fontSize="22px";
+  likeBtn.style.background="rgba(0,0,0,0.5)"; likeBtn.style.border="none"; likeBtn.style.color="#fff"; likeBtn.style.padding="10px";
+  likeBtn.style.borderRadius="50%"; likeBtn.onclick=()=>alert('You liked this reel!');
+
+  const commentBtn=document.createElement('button'); commentBtn.innerText="💬"; commentBtn.style.fontSize="22px";
+  commentBtn.style.background="rgba(0,0,0,0.5)"; commentBtn.style.border="none"; commentBtn.style.color="#fff"; commentBtn.style.padding="10px";
+  commentBtn.style.borderRadius="50%"; commentBtn.onclick=()=>alert('Comment feature coming soon!');
+
+  const shareBtn=document.createElement('button'); shareBtn.innerText="🔗"; shareBtn.style.fontSize="22px";
+  shareBtn.style.background="rgba(0,0,0,0.5)"; shareBtn.style.border="none"; shareBtn.style.color="#fff"; shareBtn.style.padding="10px";
+  shareBtn.style.borderRadius="50%"; shareBtn.onclick=()=>alert('Share feature coming soon!');
+
+  buttonsDiv.appendChild(likeBtn); buttonsDiv.appendChild(commentBtn); buttonsDiv.appendChild(shareBtn);
+  reelDiv.appendChild(buttonsDiv);
+
+  return reelDiv;
+}
+
+// Display first reel
+let reelElement=createReel(reels[currentReel]);
+reelsContainer.appendChild(reelElement);
+
+// Swipe / scroll
+let startY=0;
+reelsContainer.addEventListener('touchstart', e=>{ startY=e.touches[0].clientY; });
+reelsContainer.addEventListener('touchend', e=>{
+  let endY=e.changedTouches[0].clientY;
+  if(endY<startY-50) nextReel();
+  else if(endY>startY+50) prevReel();
+});
+reelsContainer.addEventListener('wheel', e=>{
+  if(e.deltaY>0) nextReel(); else if(e.deltaY<0) prevReel();
+});
+
+function nextReel(){ currentReel=(currentReel+1)%reels.length; updateReel(); }
+function prevReel(){ currentReel=(currentReel-1+reels.length)%reels.length; updateReel(); }
+function updateReel(){ reelsContainer.innerHTML=""; reelElement=createReel(reels[currentReel]); reelsContainer.appendChild(reelElement); }
+
+</script>
 </body>
 </html>
