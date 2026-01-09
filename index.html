@@ -11,52 +11,42 @@ body{
   font-family:Arial, sans-serif;
   background:#f4f4f4;
 }
-
-/* Header */
 .header{
   background:#e53935;
-  color:white;
-  padding:15px;
+  color:#fff;
+  padding:14px;
   text-align:center;
   font-size:22px;
 }
-
-/* Pages */
-.page{
-  display:none;
-  padding:15px;
-}
-.page.active{
-  display:block;
-}
-
-/* Cards */
+.page{display:none; padding:15px;}
+.page.active{display:block;}
 .card{
-  background:white;
+  background:#fff;
   padding:15px;
   margin-bottom:15px;
-  border-radius:10px;
-  box-shadow:0 2px 5px rgba(0,0,0,0.2);
+  border-radius:12px;
+  box-shadow:0 2px 6px rgba(0,0,0,.2);
 }
-.card h3{
-  margin:0 0 10px;
-}
+.card h3{margin:0 0 10px;}
 .btn{
   display:inline-block;
   padding:8px 12px;
   background:#e53935;
-  color:white;
+  color:#fff;
   text-decoration:none;
-  border-radius:5px;
+  border-radius:6px;
+}
+video{
+  width:100%;
+  border-radius:10px;
 }
 
 /* Bottom Nav */
 .nav{
   position:fixed;
-  bottom:0;
-  left:0;
+  bottom:0; left:0;
   width:100%;
-  background:white;
+  background:#fff;
   display:flex;
   border-top:1px solid #ccc;
 }
@@ -71,6 +61,7 @@ body{
   color:#e53935;
   font-weight:bold;
 }
+.spacer{height:70px;}
 </style>
 </head>
 
@@ -88,7 +79,7 @@ body{
 
   <div class="card">
     <h3>भक्ति कथा</h3>
-    <p>श्रद्धा और विश्वास की कहानी</p>
+    <p>श्रद्धा और विश्वास</p>
     <a class="btn" href="story.html?type=bhakti">Read Story</a>
   </div>
 
@@ -97,30 +88,53 @@ body{
     <p>संघर्ष से सफलता</p>
     <a class="btn" href="story.html?type=motivational">Read Story</a>
   </div>
+  <div class="spacer"></div>
 </div>
 
-<!-- VIDEOS -->
+<!-- VIDEOS (MP4) -->
 <div id="videos" class="page">
   <div class="card">
-    <h3>🎥 Videos</h3>
-    <p>Yahan future me videos aayengi</p>
+    <h3>Bhakti Video</h3>
+    <video controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      Your browser does not support video.
+    </video>
   </div>
+
+  <div class="card">
+    <h3>Motivational Video</h3>
+    <video controls>
+      <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="spacer"></div>
 </div>
 
-<!-- REELS -->
+<!-- REELS (MP4 SHORTS) -->
 <div id="reels" class="page">
   <div class="card">
-    <h3>🎬 Reels</h3>
-    <p>Short reels yahan show hongi</p>
+    <h3>Short Reel 1</h3>
+    <video controls style="height:360px;">
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
   </div>
+
+  <div class="card">
+    <h3>Short Reel 2</h3>
+    <video controls style="height:360px;">
+      <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="spacer"></div>
 </div>
 
 <!-- PROFILE -->
 <div id="profile" class="page">
   <div class="card">
     <h3>👤 Profile</h3>
-    <p>Login / Sign-up next step me</p>
+    <p>Login / Sign-up next step me aayega</p>
   </div>
+  <div class="spacer"></div>
 </div>
 
 <!-- Bottom Navigation -->
@@ -135,7 +149,6 @@ body{
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-
   document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
 }
