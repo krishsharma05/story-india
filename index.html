@@ -6,10 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f4f4f4;
+  font-family:Arial,sans-serif;
+  background:#000;
+  overflow:hidden;
 }
 
 /* HEADER */
@@ -23,27 +25,23 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:20px;
   z-index:10;
 }
 
-/* PAGES */
+/* PAGE */
 .page{
   display:none;
-  height:calc(100vh - 110px);
-  margin-top:50px;
-  margin-bottom:60px;
-  overflow:auto;
+  position:absolute;
+  top:50px;
+  bottom:60px;
+  width:100%;
 }
-.page.active{
-  display:block;
-}
+.page.active{display:block;}
 
-/* BOTTOM NAV */
+/* NAV */
 .nav{
   position:fixed;
   bottom:0;
-  left:0;
   width:100%;
   height:60px;
   background:#fff;
@@ -55,7 +53,6 @@ body{
   flex:1;
   border:none;
   background:none;
-  font-size:14px;
 }
 .nav button.active{
   color:#e53935;
@@ -68,8 +65,15 @@ body{
   overflow:hidden;
 }
 
-/* Reel buttons */
-.reel-actions{
+/* VIDEO */
+.reel video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* ACTIONS */
+.actions{
   position:absolute;
   right:10px;
   top:40%;
@@ -77,16 +81,16 @@ body{
   flex-direction:column;
   gap:15px;
 }
-.reel-actions button{
-  font-size:22px;
+.actions button{
   background:rgba(0,0,0,0.6);
   border:none;
   color:#fff;
+  font-size:22px;
   padding:12px;
   border-radius:50%;
 }
 
-/* Caption */
+/* CAPTION */
 .caption{
   position:absolute;
   bottom:90px;
@@ -102,28 +106,20 @@ body{
 
 <div class="header">Story India</div>
 
-<!-- STORIES -->
 <div id="stories" class="page active">
-  <h2>📖 Stories</h2>
-  <p>Yahan stories aayengi</p>
+  <h2 style="padding:20px;color:#fff">Stories</h2>
 </div>
 
-<!-- VIDEOS -->
 <div id="videos" class="page">
-  <h2>🎬 Videos</h2>
-  <p>Yahan videos aayengi</p>
+  <h2 style="padding:20px;color:#fff">Videos</h2>
 </div>
 
-<!-- REELS -->
 <div id="reels" class="page"></div>
 
-<!-- PROFILE -->
 <div id="profile" class="page">
-  <h2>👤 Profile</h2>
-  <p>User profile yahan hoga</p>
+  <h2 style="padding:20px;color:#fff">Profile</h2>
 </div>
 
-<!-- BOTTOM NAV -->
 <div class="nav">
   <button class="active" onclick="openPage('stories',this)">Story</button>
   <button onclick="openPage('videos',this)">Video</button>
@@ -137,57 +133,65 @@ function openPage(id,btn){
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  if(id==="reels") showReel(currentIndex);
+  if(id==="reels") loadReel(index);
 }
 
 /* REELS DATA */
 const reels=[
 {
-url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4",
-caption:"भारत की प्रेरणादायक कहानी"
+  url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4",
+  caption:"भारत की प्रेरणादायक कहानी"
 },
 {
-url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4",
-caption:"नई Story India Reel"
+  url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4",
+  caption:"नई Story India Reel"
 }
 ];
 
-let currentIndex=0;
+let index=0;
 const reelsBox=document.getElementById("reels");
 
-function showReel(i){
+function loadReel(i){
   reelsBox.innerHTML="";
-  const v=document.createElement("video");
-  v.src=reels[i].url;
-  v.autoplay=true;
-  v.loop=true;
-  v.style.width="100%";
-  v.style.height="100%";
-  v.style.objectFit="cover";
-  v.onclick=()=>v.paused?v.play():v.pause();
+  const reel=document.createElement("div");
+  reel.className="reel";
 
-  const cap=document.createElement("div");
-  cap.className="caption";
-  cap.innerText=reels[i].caption;
+  const video=document.createElement("video");
+  video.src=reels[i].url;
+  video.autoplay=true;
+  video.loop=true;
 
-  const act=document.createElement("div");
-  act.className="reel-actions";
-  act.innerHTML=`<button>👍</button><button>💬</button><button>🔗</button>`;
+  video.onclick=()=>video.paused?video.play():video.pause();
 
-  reelsBox.appendChild(v);
-  reelsBox.appendChild(cap);
-  reelsBox.appendChild(act);
+  const caption=document.createElement("div");
+  caption.className="caption";
+  caption.innerText=reels[i].caption;
+
+  const actions=document.createElement("div");
+  actions.className="actions";
+  actions.innerHTML="<button>👍</button><button>💬</button><button>🔗</button>";
+
+  reel.append(video,caption,actions);
+  reelsBox.appendChild(reel);
 }
 
-/* Swipe */
+/* PERFECT SWIPE */
 let startY=0;
-reelsBox.addEventListener("touchstart",e=>startY=e.touches[0].clientY);
+reelsBox.addEventListener("touchstart",e=>{
+  startY=e.touches[0].clientY;
+},{passive:true});
+
 reelsBox.addEventListener("touchend",e=>{
   let endY=e.changedTouches[0].clientY;
-  if(endY<startY-50){currentIndex=(currentIndex+1)%reels.length;}
-  if(endY>startY+50){currentIndex=(currentIndex-1+reels.length)%reels.length;}
-  showReel(currentIndex);
-});
+  if(startY-endY>60){
+    index=(index+1)%reels.length;
+    loadReel(index);
+  }
+  if(endY-startY>60){
+    index=(index-1+reels.length)%reels.length;
+    loadReel(index);
+  }
+},{passive:true});
 </script>
 
 </body>
