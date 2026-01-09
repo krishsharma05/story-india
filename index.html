@@ -119,10 +119,10 @@ function createReel(reelData){
   caption.style.textShadow="1px 1px 5px #000";
   reelDiv.appendChild(caption);
 
-  // Right-side vertical buttons
+  // Right-side vertical buttons (slightly upper)
   const buttonsDiv=document.createElement('div');
   buttonsDiv.style.position="absolute";
-  buttonsDiv.style.top="50%";
+  buttonsDiv.style.top="40%";  // 🔹 center se thoda upar
   buttonsDiv.style.right="10px";
   buttonsDiv.style.transform="translateY(-50%)";
   buttonsDiv.style.display="flex";
