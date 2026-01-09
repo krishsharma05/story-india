@@ -7,12 +7,7 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-  font-family:Arial,sans-serif;
-  background:#000;
-  overflow:hidden;
-}
+body{font-family:Arial,sans-serif;}
 
 /* HEADER */
 .header{
@@ -27,16 +22,6 @@ body{
   justify-content:center;
   z-index:10;
 }
-
-/* PAGE */
-.page{
-  display:none;
-  position:absolute;
-  top:50px;
-  bottom:60px;
-  width:100%;
-}
-.page.active{display:block;}
 
 /* NAV */
 .nav{
@@ -59,13 +44,30 @@ body{
   font-weight:bold;
 }
 
-/* REELS */
+/* PAGE */
+.page{
+  display:none;
+  position:fixed;
+  top:50px;
+  bottom:60px;
+  width:100%;
+}
+.page.active{display:block;}
+
+/* REELS CONTAINER */
 #reels{
   background:#000;
-  overflow:hidden;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
 }
 
-/* VIDEO */
+/* SINGLE REEL */
+.reel{
+  height:100%;
+  position:relative;
+  scroll-snap-align:start;
+}
+
 .reel video{
   width:100%;
   height:100%;
@@ -107,17 +109,44 @@ body{
 <div class="header">Story India</div>
 
 <div id="stories" class="page active">
-  <h2 style="padding:20px;color:#fff">Stories</h2>
+  <h2 style="padding:20px">Stories</h2>
 </div>
 
 <div id="videos" class="page">
-  <h2 style="padding:20px;color:#fff">Videos</h2>
+  <h2 style="padding:20px">Videos</h2>
 </div>
 
-<div id="reels" class="page"></div>
+<!-- REELS -->
+<div id="reels" class="page">
+
+  <div class="reel">
+    <video autoplay muted loop onclick="this.paused?this.play():this.pause()">
+      <source src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4">
+    </video>
+    <div class="caption">भारत की प्रेरणादायक कहानी</div>
+    <div class="actions">
+      <button>👍</button>
+      <button>💬</button>
+      <button>🔗</button>
+    </div>
+  </div>
+
+  <div class="reel">
+    <video autoplay muted loop onclick="this.paused?this.play():this.pause()">
+      <source src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4">
+    </video>
+    <div class="caption">नई Story India Reel</div>
+    <div class="actions">
+      <button>👍</button>
+      <button>💬</button>
+      <button>🔗</button>
+    </div>
+  </div>
+
+</div>
 
 <div id="profile" class="page">
-  <h2 style="padding:20px;color:#fff">Profile</h2>
+  <h2 style="padding:20px">Profile</h2>
 </div>
 
 <div class="nav">
@@ -133,65 +162,7 @@ function openPage(id,btn){
   document.getElementById(id).classList.add('active');
   document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  if(id==="reels") loadReel(index);
 }
-
-/* REELS DATA */
-const reels=[
-{
-  url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4",
-  caption:"भारत की प्रेरणादायक कहानी"
-},
-{
-  url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4",
-  caption:"नई Story India Reel"
-}
-];
-
-let index=0;
-const reelsBox=document.getElementById("reels");
-
-function loadReel(i){
-  reelsBox.innerHTML="";
-  const reel=document.createElement("div");
-  reel.className="reel";
-
-  const video=document.createElement("video");
-  video.src=reels[i].url;
-  video.autoplay=true;
-  video.loop=true;
-
-  video.onclick=()=>video.paused?video.play():video.pause();
-
-  const caption=document.createElement("div");
-  caption.className="caption";
-  caption.innerText=reels[i].caption;
-
-  const actions=document.createElement("div");
-  actions.className="actions";
-  actions.innerHTML="<button>👍</button><button>💬</button><button>🔗</button>";
-
-  reel.append(video,caption,actions);
-  reelsBox.appendChild(reel);
-}
-
-/* PERFECT SWIPE */
-let startY=0;
-reelsBox.addEventListener("touchstart",e=>{
-  startY=e.touches[0].clientY;
-},{passive:true});
-
-reelsBox.addEventListener("touchend",e=>{
-  let endY=e.changedTouches[0].clientY;
-  if(startY-endY>60){
-    index=(index+1)%reels.length;
-    loadReel(index);
-  }
-  if(endY-startY>60){
-    index=(index-1+reels.length)%reels.length;
-    loadReel(index);
-  }
-},{passive:true});
 </script>
 
 </body>
