@@ -86,10 +86,10 @@ function showPage(id,btn){
   btn.classList.add('active');
 }
 
-// 🌟 Reels Data
+// 🌟 Reels Data (2 reels)
 const reels = [
   {url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4",caption:"💬 भारत की प्रेरणादायक कहानी"},
-  {url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4",caption:"💬 भक्ति और श्रद्धा की कहानी"}
+  {url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4",caption:"💬 नई प्रेरणादायक कहानी"}
 ];
 
 let currentReel = 0;
@@ -105,6 +105,13 @@ function createReel(reelData){
   video.src=reelData.url; video.type="video/mp4"; video.autoplay=true; video.muted=false;
   video.controls=false; video.loop=true;
   video.style.width="100%"; video.style.height="100%"; video.style.objectFit="cover";
+
+  // 🔹 Pause/play on tap
+  video.addEventListener('click',()=>{
+    if(video.paused) video.play();
+    else video.pause();
+  });
+
   reelDiv.appendChild(video);
 
   // Caption (bottom-left)
@@ -119,10 +126,10 @@ function createReel(reelData){
   caption.style.textShadow="1px 1px 5px #000";
   reelDiv.appendChild(caption);
 
-  // Right-side vertical buttons (slightly upper)
+  // Right-side vertical buttons (top 40%)
   const buttonsDiv=document.createElement('div');
   buttonsDiv.style.position="absolute";
-  buttonsDiv.style.top="40%";  // 🔹 center se thoda upar
+  buttonsDiv.style.top="40%";  // slightly above center
   buttonsDiv.style.right="10px";
   buttonsDiv.style.transform="translateY(-50%)";
   buttonsDiv.style.display="flex";
@@ -144,7 +151,6 @@ function createReel(reelData){
     b.style.cursor="pointer";
   });
 
-  // Dummy actions
   likeBtn.onclick=()=>alert('You liked this reel!');
   commentBtn.onclick=()=>alert('Comment feature coming soon!');
   shareBtn.onclick=()=>alert('Share feature coming soon!');
