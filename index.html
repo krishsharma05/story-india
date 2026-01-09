@@ -8,9 +8,9 @@
 <style>
 body{
   margin:0;
-  font-family:Arial;
   background:#000;
   color:#fff;
+  font-family:Arial;
 }
 
 /* HEADER */
@@ -20,7 +20,7 @@ body{
   font-weight:bold;
 }
 
-/* CATEGORY */
+/* SECTION */
 .section{
   padding:10px;
 }
@@ -29,7 +29,7 @@ body{
   margin-bottom:8px;
 }
 
-/* STORY LIST */
+/* STORY CARD */
 .story-row{
   display:flex;
   overflow-x:auto;
@@ -37,7 +37,6 @@ body{
 }
 .story-card{
   min-width:140px;
-  cursor:pointer;
 }
 .story-card img{
   width:140px;
@@ -49,22 +48,44 @@ body{
   margin-top:5px;
 }
 
-/* PLAYLIST PAGE */
-#playlist{
+/* PAGES */
+.page{
   display:none;
-  padding:10px;
 }
-.back{
-  color:#ff4081;
+.page.active{
+  display:block;
+}
+
+/* PROFILE */
+.profile-box{
+  text-align:center;
+  margin-top:40px;
+}
+.profile-box img{
+  width:100px;
+  height:100px;
+  border-radius:50%;
   margin-bottom:10px;
-  cursor:pointer;
 }
-.video-item{
-  margin-bottom:15px;
-}
-video{
+
+/* BOTTOM NAV */
+.nav{
+  position:fixed;
+  bottom:0;
   width:100%;
-  border-radius:10px;
+  background:#111;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+}
+.nav button{
+  background:none;
+  border:none;
+  color:#aaa;
+  font-size:14px;
+}
+.nav button.active{
+  color:#ff4081;
 }
 </style>
 </head>
@@ -72,72 +93,63 @@ video{
 <body>
 
 <!-- HOME -->
-<div id="home">
+<div id="home" class="page active">
   <div class="header">Story India</div>
 
   <div class="section">
     <div class="section-title">Love Affairs</div>
     <div class="story-row">
-
-      <div class="story-card" onclick="openPlaylist('raju')">
+      <div class="story-card">
         <img src="https://via.placeholder.com/300x400?text=Raju+Bana+Raja">
         <div class="story-name">Raju Bana Raja</div>
       </div>
-
-      <div class="story-card" onclick="openPlaylist('naseeb')">
+      <div class="story-card">
         <img src="https://via.placeholder.com/300x400?text=Naseeb+Ka+King">
         <div class="story-name">Naseeb Ka King</div>
       </div>
-
     </div>
   </div>
 </div>
 
-<!-- PLAYLIST -->
-<div id="playlist">
-  <div class="back" onclick="goBack()">← Back</div>
-  <h2 id="playlistTitle"></h2>
-  <div id="videos"></div>
+<!-- MY LIST -->
+<div id="mylist" class="page">
+  <div class="header">My List</div>
+
+  <div class="section">
+    <div class="story-row">
+      <div class="story-card">
+        <img src="https://via.placeholder.com/300x400?text=Saved+Story">
+        <div class="story-name">Saved Story</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div id="profile" class="page">
+  <div class="header">Profile</div>
+
+  <div class="profile-box">
+    <img src="https://via.placeholder.com/200">
+    <h3>Guest User</h3>
+    <p>Login feature coming soon</p>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="nav">
+  <button class="active" onclick="showPage('home',this)">Home</button>
+  <button onclick="showPage('mylist',this)">My List</button>
+  <button onclick="showPage('profile',this)">Profile</button>
 </div>
 
 <script>
-const data = {
-  raju: {
-    title: "Raju Bana Raja",
-    videos: [
-      "https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4",
-      "https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4"
-    ]
-  },
-  naseeb: {
-    title: "Naseeb Ka King",
-    videos: [
-      "https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4"
-    ]
-  }
-};
+function showPage(page,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
 
-function openPlaylist(key){
-  document.getElementById("home").style.display="none";
-  document.getElementById("playlist").style.display="block";
-  document.getElementById("playlistTitle").innerText = data[key].title;
-
-  let html="";
-  data[key].videos.forEach(v=>{
-    html += `
-      <div class="video-item">
-        <video controls>
-          <source src="${v}">
-        </video>
-      </div>
-    `;
-  });
-  document.getElementById("videos").innerHTML = html;
-}
-
-function goBack(){
-  document.getElementById("playlist").style.display="none";
-  document.getElementById("home").style.display="block";
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
 }
 </script>
 
