@@ -98,36 +98,61 @@ const reelsContainer = document.getElementById('reels');
 function createReel(reelData){
   const reelDiv = document.createElement('div');
   reelDiv.style.position="absolute"; reelDiv.style.top="0"; reelDiv.style.left="0";
-  reelDiv.style.width="100%"; reelDiv.style.height="100%"; reelDiv.style.display="flex";
-  reelDiv.style.flexDirection="column"; reelDiv.style.justifyContent="flex-end"; reelDiv.style.background="#000";
+  reelDiv.style.width="100%"; reelDiv.style.height="100%"; reelDiv.style.background="#000";
 
+  // Video
   const video=document.createElement('video');
   video.src=reelData.url; video.type="video/mp4"; video.autoplay=true; video.muted=false;
-  video.controls=false; video.loop=true; video.style.width="100%"; video.style.height="100%"; video.style.objectFit="cover";
+  video.controls=false; video.loop=true;
+  video.style.width="100%"; video.style.height="100%"; video.style.objectFit="cover";
   reelDiv.appendChild(video);
 
+  // Caption (bottom-left)
   const caption=document.createElement('div');
-  caption.innerText=reelData.caption; caption.style.position="absolute"; caption.style.bottom="80px";
-  caption.style.left="15px"; caption.style.color="#fff"; caption.style.fontSize="18px"; caption.style.fontWeight="bold";
-  caption.style.textShadow="1px 1px 5px #000"; reelDiv.appendChild(caption);
+  caption.innerText=reelData.caption;
+  caption.style.position="absolute";
+  caption.style.bottom="20px";
+  caption.style.left="15px";
+  caption.style.color="#fff";
+  caption.style.fontSize="18px";
+  caption.style.fontWeight="bold";
+  caption.style.textShadow="1px 1px 5px #000";
+  reelDiv.appendChild(caption);
 
+  // Right-side vertical buttons
   const buttonsDiv=document.createElement('div');
-  buttonsDiv.style.position="absolute"; buttonsDiv.style.bottom="20px"; buttonsDiv.style.right="15px";
-  buttonsDiv.style.display="flex"; buttonsDiv.style.flexDirection="column"; buttonsDiv.style.gap="10px";
+  buttonsDiv.style.position="absolute";
+  buttonsDiv.style.top="50%";
+  buttonsDiv.style.right="10px";
+  buttonsDiv.style.transform="translateY(-50%)";
+  buttonsDiv.style.display="flex";
+  buttonsDiv.style.flexDirection="column";
+  buttonsDiv.style.alignItems="center";
+  buttonsDiv.style.gap="15px";
 
-  const likeBtn=document.createElement('button'); likeBtn.innerText="👍"; likeBtn.style.fontSize="22px";
-  likeBtn.style.background="rgba(0,0,0,0.5)"; likeBtn.style.border="none"; likeBtn.style.color="#fff"; likeBtn.style.padding="10px";
-  likeBtn.style.borderRadius="50%"; likeBtn.onclick=()=>alert('You liked this reel!');
+  const likeBtn=document.createElement('button'); likeBtn.innerText="👍";
+  const commentBtn=document.createElement('button'); commentBtn.innerText="💬";
+  const shareBtn=document.createElement('button'); shareBtn.innerText="🔗";
 
-  const commentBtn=document.createElement('button'); commentBtn.innerText="💬"; commentBtn.style.fontSize="22px";
-  commentBtn.style.background="rgba(0,0,0,0.5)"; commentBtn.style.border="none"; commentBtn.style.color="#fff"; commentBtn.style.padding="10px";
-  commentBtn.style.borderRadius="50%"; commentBtn.onclick=()=>alert('Comment feature coming soon!');
+  [likeBtn, commentBtn, shareBtn].forEach(b=>{
+    b.style.fontSize="24px";
+    b.style.background="rgba(0,0,0,0.5)";
+    b.style.border="none";
+    b.style.color="#fff";
+    b.style.padding="12px";
+    b.style.borderRadius="50%";
+    b.style.cursor="pointer";
+  });
 
-  const shareBtn=document.createElement('button'); shareBtn.innerText="🔗"; shareBtn.style.fontSize="22px";
-  shareBtn.style.background="rgba(0,0,0,0.5)"; shareBtn.style.border="none"; shareBtn.style.color="#fff"; shareBtn.style.padding="10px";
-  shareBtn.style.borderRadius="50%"; shareBtn.onclick=()=>alert('Share feature coming soon!');
+  // Dummy actions
+  likeBtn.onclick=()=>alert('You liked this reel!');
+  commentBtn.onclick=()=>alert('Comment feature coming soon!');
+  shareBtn.onclick=()=>alert('Share feature coming soon!');
 
-  buttonsDiv.appendChild(likeBtn); buttonsDiv.appendChild(commentBtn); buttonsDiv.appendChild(shareBtn);
+  buttonsDiv.appendChild(likeBtn);
+  buttonsDiv.appendChild(commentBtn);
+  buttonsDiv.appendChild(shareBtn);
+
   reelDiv.appendChild(buttonsDiv);
 
   return reelDiv;
@@ -137,7 +162,7 @@ function createReel(reelData){
 let reelElement=createReel(reels[currentReel]);
 reelsContainer.appendChild(reelElement);
 
-// Swipe / scroll
+// Swipe / scroll functionality
 let startY=0;
 reelsContainer.addEventListener('touchstart', e=>{ startY=e.touches[0].clientY; });
 reelsContainer.addEventListener('touchend', e=>{
