@@ -1,205 +1,140 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Story India</title>
+<title>Story India Reels</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body{margin:0;font-family:Arial,sans-serif;background:#f4f4f4;}
-.header{background:#e53935;color:#fff;padding:14px;text-align:center;font-size:22px;}
-.page{display:none;padding:15px;padding-bottom:80px;}
-.page.active{display:block;}
-.card{background:#fff;padding:15px;margin-bottom:15px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.2);}
-.card h3{margin:0 0 10px;}
-.btn{display:inline-block;padding:8px 12px;background:#e53935;color:#fff;text-decoration:none;border-radius:6px;}
-video{width:100%;border-radius:10px;}
 
-/* Bottom Nav */
-.nav{position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;border-top:1px solid #ccc;}
-.nav button{flex:1;padding:10px;border:none;background:none;font-size:14px;}
-.nav button.active{color:#e53935;font-weight:bold;}
-.spacer{height:70px;}
+<style>
+body {
+  margin: 0;
+  background: black;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+#reels {
+  height: 100vh;
+  width: 100%;
+}
+
+.reel {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.caption {
+  position: absolute;
+  bottom: 25px;
+  left: 15px;
+  color: white;
+  font-size: 16px;
+  max-width: 70%;
+}
+
+.actions {
+  position: absolute;
+  right: 12px;
+  top: 32%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  color: white;
+  font-size: 26px;
+}
+
+.actions div {
+  cursor: pointer;
+  text-align: center;
+}
 </style>
 </head>
+
 <body>
 
-<div class="header">Story India</div>
-
-<!-- STORIES -->
-<div id="stories" class="page active">
-  <div class="card">
-    <h3>ऐतिहासिक कहानी</h3>
-    <p>भारत का गौरवशाली इतिहास</p>
-    <a class="btn" href="story.html?type=history">Read Story</a>
-  </div>
-  <div class="card">
-    <h3>भक्ति कथा</h3>
-    <p>श्रद्धा और विश्वास</p>
-    <a class="btn" href="story.html?type=bhakti">Read Story</a>
-  </div>
-  <div class="card">
-    <h3>प्रेरणादायक कहानी</h3>
-    <p>संघर्ष से सफलता</p>
-    <a class="btn" href="story.html?type=motivational">Read Story</a>
-  </div>
-  <div class="spacer"></div>
-</div>
-
-<!-- VIDEOS -->
-<div id="videos" class="page">
-  <div class="card">
-    <h3>Story India Video</h3>
-    <video controls>
-      <source src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4" type="video/mp4">
-      आपका ब्राउज़र वीडियो सपोर्ट नहीं करता।
-    </video>
-  </div>
-  <div class="spacer"></div>
-</div>
-
-<!-- REELS (Instagram-style) -->
-<div id="reels" class="page" style="overflow:hidden; height:100vh; position:relative; background:#000;"></div>
-
-<!-- PROFILE -->
-<div id="profile" class="page">
-  <div class="card">
-    <h3>👤 Profile</h3>
-    <p>Login / Sign-up next step me aayega</p>
-  </div>
-  <div class="spacer"></div>
-</div>
-
-<!-- Bottom Navigation -->
-<div class="nav">
-  <button class="active" onclick="showPage('stories',this)">Stories</button>
-  <button onclick="showPage('videos',this)">Videos</button>
-  <button onclick="showPage('reels',this)">Reels</button>
-  <button onclick="showPage('profile',this)">Profile</button>
-</div>
+<div id="reels"></div>
 
 <script>
-// Bottom nav
-function showPage(id,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-// 🌟 2 Reels Data
 const reels = [
-  {url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4",caption:"💬 भारत की प्रेरणादायक कहानी"},
-  {url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4",caption:"💬 नई प्रेरणादायक कहानी"}
+  {
+    video: "https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4",
+    caption: "भारत की प्रेरणादायक कहानी 🇮🇳"
+  },
+  {
+    video: "https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4",
+    caption: "नई प्रेरणादायक कहानी ✨"
+  }
 ];
 
-let currentReel = 0;
-const reelsContainer = document.getElementById('reels');
+let index = 0;
+let currentVideo = null;
+const container = document.getElementById("reels");
 
-function createReel(reelData){
-  const reelDiv = document.createElement('div');
-  reelDiv.style.position="absolute";
-  reelDiv.style.top="0";
-  reelDiv.style.left="0";
-  reelDiv.style.width="100%";
-  reelDiv.style.height="100%";
-  reelDiv.style.background="#000";
+function loadReel(i) {
+  container.innerHTML = "";
 
-  // Video
-  const video = document.createElement('video');
-  video.src = reelData.url;
+  const reel = document.createElement("div");
+  reel.className = "reel";
+
+  const video = document.createElement("video");
+  video.src = reels[i].video;
   video.autoplay = true;
   video.loop = true;
-  video.muted = false;
-  video.controls = false;
-  video.style.width = "100%";
-  video.style.height = "100%";
-  video.style.objectFit = "cover";
+  video.playsInline = true;
 
-  // 🔹 Pause/play on tap
-  video.addEventListener('click', () => {
-    if(video.paused) video.play();
-    else video.pause();
-  });
+  if (currentVideo) currentVideo.pause();
+  currentVideo = video;
 
-  reelDiv.appendChild(video);
+  video.onclick = () => {
+    video.paused ? video.play() : video.pause();
+  };
 
-  // Caption
-  const caption = document.createElement('div');
-  caption.innerText = reelData.caption;
-  caption.style.position = "absolute";
-  caption.style.bottom = "20px";
-  caption.style.left = "15px";
-  caption.style.color = "#fff";
-  caption.style.fontSize = "18px";
-  caption.style.fontWeight = "bold";
-  caption.style.textShadow = "1px 1px 5px #000";
-  reelDiv.appendChild(caption);
+  const caption = document.createElement("div");
+  caption.className = "caption";
+  caption.innerText = reels[i].caption;
 
-  // Right-side buttons (top 40%)
-  const buttonsDiv = document.createElement('div');
-  buttonsDiv.style.position = "absolute";
-  buttonsDiv.style.top = "40%";
-  buttonsDiv.style.right = "10px";
-  buttonsDiv.style.transform = "translateY(-50%)";
-  buttonsDiv.style.display = "flex";
-  buttonsDiv.style.flexDirection = "column";
-  buttonsDiv.style.alignItems = "center";
-  buttonsDiv.style.gap = "15px";
+  const actions = document.createElement("div");
+  actions.className = "actions";
+  actions.innerHTML = `
+    <div>👍</div>
+    <div>💬</div>
+    <div>🔗</div>
+  `;
 
-  const likeBtn = document.createElement('button'); likeBtn.innerText = "👍";
-  const commentBtn = document.createElement('button'); commentBtn.innerText = "💬";
-  const shareBtn = document.createElement('button'); shareBtn.innerText = "🔗";
-
-  [likeBtn, commentBtn, shareBtn].forEach(b => {
-    b.style.fontSize = "24px";
-    b.style.background = "rgba(0,0,0,0.5)";
-    b.style.border = "none";
-    b.style.color = "#fff";
-    b.style.padding = "12px";
-    b.style.borderRadius = "50%";
-    b.style.cursor = "pointer";
-  });
-
-  likeBtn.onclick = () => alert('You liked this reel!');
-  commentBtn.onclick = () => alert('Comment feature coming soon!');
-  shareBtn.onclick = () => alert('Share feature coming soon!');
-
-  buttonsDiv.appendChild(likeBtn);
-  buttonsDiv.appendChild(commentBtn);
-  buttonsDiv.appendChild(shareBtn);
-
-  reelDiv.appendChild(buttonsDiv);
-
-  return reelDiv;
+  reel.appendChild(video);
+  reel.appendChild(caption);
+  reel.appendChild(actions);
+  container.appendChild(reel);
 }
 
-// Display specific reel
-function showReel(index){
-  reelsContainer.innerHTML = "";
-  currentReel = index;
-  const reelElement = createReel(reels[currentReel]);
-  reelsContainer.appendChild(reelElement);
-}
-
-// Swipe / scroll
+// Swipe system
 let startY = 0;
-reelsContainer.addEventListener('touchstart', e => { startY = e.touches[0].clientY; });
-reelsContainer.addEventListener('touchend', e => {
+
+container.addEventListener("touchstart", e => {
+  startY = e.touches[0].clientY;
+});
+
+container.addEventListener("touchend", e => {
   let endY = e.changedTouches[0].clientY;
-  if(endY < startY - 50) nextReel();
-  else if(endY > startY + 50) prevReel();
+  if (endY < startY - 50 && index < reels.length - 1) {
+    index++;
+    loadReel(index);
+  }
+  if (endY > startY + 50 && index > 0) {
+    index--;
+    loadReel(index);
+  }
 });
-reelsContainer.addEventListener('wheel', e => {
-  if(e.deltaY > 0) nextReel();
-  else if(e.deltaY < 0) prevReel();
-});
 
-function nextReel(){ showReel((currentReel + 1) % reels.length); }
-function prevReel(){ showReel((currentReel - 1 + reels.length) % reels.length); }
-
-// Initial display
-showReel(0);
-
+loadReel(0);
 </script>
+
 </body>
 </html>
