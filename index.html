@@ -1,153 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Story India</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:#000;
-  color:#fff;
-  font-family:Arial;
-  padding-bottom:70px; /* 🔥 IMPORTANT */
-}
-
-/* HEADER */
-.header{
-  padding:15px;
-  font-size:22px;
-  font-weight:bold;
-}
-
-/* PAGES */
-.page{
-  display:none;
-}
-.page.active{
-  display:block;
-}
-
-/* STORY */
-.section{
-  padding:10px;
-}
-.section-title{
-  font-size:18px;
-  margin-bottom:10px;
-}
-.story-row{
-  display:flex;
-  overflow-x:auto;
-  gap:10px;
-}
-.story-card{
-  min-width:140px;
-}
-.story-card img{
-  width:140px;
-  height:200px;
-  border-radius:10px;
-}
-.story-name{
-  font-size:14px;
-  margin-top:5px;
-}
-
-/* PROFILE */
-.profile-box{
-  text-align:center;
-  margin-top:50px;
-}
-.profile-box img{
-  width:100px;
-  height:100px;
-  border-radius:50%;
-}
-
-/* BOTTOM NAV */
-.nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  height:60px;
-  background:#111;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  z-index:999;
-}
-.nav button{
-  background:none;
-  border:none;
-  color:#aaa;
-  font-size:14px;
-}
-.nav button.active{
-  color:#ff4081;
-}
-</style>
+  <meta charset="UTF-8" />
+  <title>Story India Reels</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- HOME -->
-<div id="home" class="page active">
-  <div class="header">Story India</div>
+<div id="reels-container">
+  <div class="reel active">
+    <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4" autoplay muted loop></video>
+    <div class="caption">🙏 भारत की प्रेरणादायक कहानी</div>
+  </div>
 
-  <div class="section">
-    <div class="section-title">Love Affairs</div>
-    <div class="story-row">
-      <div class="story-card">
-        <img src="https://via.placeholder.com/300x400?text=Raju+Bana+Raja">
-        <div class="story-name">Raju Bana Raja</div>
-      </div>
-      <div class="story-card">
-        <img src="https://via.placeholder.com/300x400?text=Naseeb+Ka+King">
-        <div class="story-name">Naseeb Ka King</div>
-      </div>
-    </div>
+  <div class="reel">
+    <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4" muted loop></video>
+    <div class="caption">✨ संघर्ष से सफलता तक</div>
   </div>
 </div>
 
-<!-- MY LIST -->
-<div id="mylist" class="page">
-  <div class="header">My List</div>
-  <div class="section">
-    <p>No saved stories yet</p>
-  </div>
+<!-- Right Buttons -->
+<div class="actions">
+  <button>❤️</button>
+  <button>💬</button>
+  <button>🔗</button>
 </div>
 
-<!-- PROFILE -->
-<div id="profile" class="page">
-  <div class="header">Profile</div>
-  <div class="profile-box">
-    <img src="https://via.placeholder.com/200">
-    <h3>Guest User</h3>
-    <p>Login coming soon</p>
-  </div>
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <span>Home</span>
+  <span>My List</span>
+  <span>Profile</span>
 </div>
 
-<!-- BOTTOM NAV -->
-<div class="nav">
-  <button class="active" onclick="showPage('home',this)">Home</button>
-  <button onclick="showPage('mylist',this)">My List</button>
-  <button onclick="showPage('profile',this)">Profile</button>
-</div>
-
-<script>
-function showPage(page,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(page).classList.add('active');
-
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
