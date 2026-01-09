@@ -8,117 +8,138 @@
 <style>
 body{
   margin:0;
+  font-family:Arial;
   background:#000;
   color:#fff;
-  font-family:Arial, sans-serif;
 }
 
 /* HEADER */
 .header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
   padding:15px;
-}
-.logo{
   font-size:22px;
   font-weight:bold;
-  color:#ff2fa0;
 }
 
-/* SECTION */
+/* CATEGORY */
 .section{
   padding:10px;
 }
-.section h2{
-  margin:10px 0;
+.section-title{
+  font-size:18px;
+  margin-bottom:8px;
 }
 
-/* HORIZONTAL LIST */
-.list{
+/* STORY LIST */
+.story-row{
   display:flex;
-  gap:12px;
   overflow-x:auto;
+  gap:10px;
 }
-.card{
+.story-card{
   min-width:140px;
+  cursor:pointer;
 }
-.card img{
-  width:100%;
+.story-card img{
+  width:140px;
+  height:200px;
   border-radius:10px;
 }
-.card p{
+.story-name{
   font-size:14px;
-  margin:6px 0 0;
+  margin-top:5px;
 }
 
-/* BOTTOM NAV */
-.nav{
-  position:fixed;
-  bottom:0;
+/* PLAYLIST PAGE */
+#playlist{
+  display:none;
+  padding:10px;
+}
+.back{
+  color:#ff4081;
+  margin-bottom:10px;
+  cursor:pointer;
+}
+.video-item{
+  margin-bottom:15px;
+}
+video{
   width:100%;
-  background:#111;
-  display:flex;
-  border-top:1px solid #222;
-}
-.nav button{
-  flex:1;
-  background:none;
-  border:none;
-  color:#aaa;
-  padding:10px 0;
-  font-size:12px;
-}
-.nav button.active{
-  color:#fff;
+  border-radius:10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="logo">STORY INDIA</div>
-</div>
+<!-- HOME -->
+<div id="home">
+  <div class="header">Story India</div>
 
-<!-- CONTENT -->
-<div class="section">
-  <h2>Love Affairs</h2>
-  <div class="list">
-    <div class="card">
-      <img src="https://via.placeholder.com/200x280">
-      <p>Rich & Dangerous</p>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/200x280">
-      <p>Raju Bana Raja</p>
-    </div>
-  </div>
-</div>
+  <div class="section">
+    <div class="section-title">Love Affairs</div>
+    <div class="story-row">
 
-<div class="section">
-  <h2>Binge Worthy Series</h2>
-  <div class="list">
-    <div class="card">
-      <img src="https://via.placeholder.com/200x280">
-      <p>Naseeb Ka King</p>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/200x280">
-      <p>Race Ka Badshah</p>
+      <div class="story-card" onclick="openPlaylist('raju')">
+        <img src="https://via.placeholder.com/300x400?text=Raju+Bana+Raja">
+        <div class="story-name">Raju Bana Raja</div>
+      </div>
+
+      <div class="story-card" onclick="openPlaylist('naseeb')">
+        <img src="https://via.placeholder.com/300x400?text=Naseeb+Ka+King">
+        <div class="story-name">Naseeb Ka King</div>
+      </div>
+
     </div>
   </div>
 </div>
 
-<div style="height:70px"></div>
-
-<!-- BOTTOM NAV (NO PREMIUM) -->
-<div class="nav">
-  <button class="active">Home</button>
-  <button>My List</button>
-  <button>Profile</button>
+<!-- PLAYLIST -->
+<div id="playlist">
+  <div class="back" onclick="goBack()">← Back</div>
+  <h2 id="playlistTitle"></h2>
+  <div id="videos"></div>
 </div>
+
+<script>
+const data = {
+  raju: {
+    title: "Raju Bana Raja",
+    videos: [
+      "https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4",
+      "https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4"
+    ]
+  },
+  naseeb: {
+    title: "Naseeb Ka King",
+    videos: [
+      "https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4"
+    ]
+  }
+};
+
+function openPlaylist(key){
+  document.getElementById("home").style.display="none";
+  document.getElementById("playlist").style.display="block";
+  document.getElementById("playlistTitle").innerText = data[key].title;
+
+  let html="";
+  data[key].videos.forEach(v=>{
+    html += `
+      <div class="video-item">
+        <video controls>
+          <source src="${v}">
+        </video>
+      </div>
+    `;
+  });
+  document.getElementById("videos").innerHTML = html;
+}
+
+function goBack(){
+  document.getElementById("playlist").style.display="none";
+  document.getElementById("home").style.display="block";
+}
+</script>
 
 </body>
 </html>
