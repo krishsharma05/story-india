@@ -2,138 +2,209 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Story India Reels</title>
+<title>Story India</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin: 0;
-  background: black;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#000;
 }
 
-#reels {
-  height: 100vh;
-  width: 100%;
+/* Header */
+.header{
+  background:#e53935;
+  color:#fff;
+  padding:12px;
+  text-align:center;
+  font-size:22px;
 }
 
-.reel {
-  height: 100vh;
-  width: 100%;
-  position: relative;
+/* Pages */
+.page{
+  display:none;
+  height:100vh;
+}
+.page.active{
+  display:block;
 }
 
-video {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+/* Bottom Nav */
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#fff;
+  display:flex;
+  border-top:1px solid #ccc;
+}
+.nav button{
+  flex:1;
+  padding:10px;
+  border:none;
+  background:none;
+  font-size:14px;
+}
+.nav button.active{
+  color:#e53935;
+  font-weight:bold;
 }
 
-.caption {
-  position: absolute;
-  bottom: 25px;
-  left: 15px;
-  color: white;
-  font-size: 16px;
-  max-width: 70%;
+/* REELS */
+#reels{
+  background:#000;
+  position:relative;
+  overflow:hidden;
 }
 
-.actions {
-  position: absolute;
-  right: 12px;
-  top: 32%;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  color: white;
-  font-size: 26px;
+/* Right buttons */
+.reel-actions{
+  position:absolute;
+  right:10px;
+  top:40%;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+.reel-actions button{
+  font-size:24px;
+  background:rgba(0,0,0,0.6);
+  border:none;
+  color:#fff;
+  padding:12px;
+  border-radius:50%;
 }
 
-.actions div {
-  cursor: pointer;
-  text-align: center;
+/* Caption */
+.caption{
+  position:absolute;
+  bottom:80px;
+  left:15px;
+  color:#fff;
+  font-size:18px;
+  font-weight:bold;
+  text-shadow:1px 1px 5px #000;
 }
 </style>
 </head>
 
 <body>
 
-<div id="reels"></div>
+<div class="header">Story India</div>
+
+<!-- STORIES -->
+<div id="stories" class="page active" style="background:#f4f4f4;padding:20px;">
+  <h2>Stories Section</h2>
+  <p>Stories yahan aayengi</p>
+</div>
+
+<!-- VIDEOS -->
+<div id="videos" class="page" style="background:#f4f4f4;padding:20px;">
+  <h2>Videos Section</h2>
+</div>
+
+<!-- REELS -->
+<div id="reels" class="page"></div>
+
+<!-- PROFILE -->
+<div id="profile" class="page" style="background:#f4f4f4;padding:20px;">
+  <h2>Profile</h2>
+</div>
+
+<!-- Bottom Navigation -->
+<div class="nav">
+  <button class="active" onclick="openPage('stories',this)">Stories</button>
+  <button onclick="openPage('videos',this)">Videos</button>
+  <button onclick="openPage('reels',this)">Reels</button>
+  <button onclick="openPage('profile',this)">Profile</button>
+</div>
 
 <script>
+/* NAV */
+function openPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+
+  if(id === "reels"){
+    showReel(currentIndex);
+  }
+}
+
+/* REELS DATA */
 const reels = [
   {
-    video: "https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4",
-    caption: "भारत की प्रेरणादायक कहानी 🇮🇳"
+    url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4",
+    caption:"भारत की प्रेरणादायक कहानी"
   },
   {
-    video: "https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4",
-    caption: "नई प्रेरणादायक कहानी ✨"
+    url:"https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4",
+    caption:"नई प्रेरणादायक कहानी"
   }
 ];
 
-let index = 0;
-let currentVideo = null;
-const container = document.getElementById("reels");
+let currentIndex = 0;
+const reelsBox = document.getElementById("reels");
 
-function loadReel(i) {
-  container.innerHTML = "";
+/* SHOW REEL */
+function showReel(index){
+  reelsBox.innerHTML = "";
 
-  const reel = document.createElement("div");
-  reel.className = "reel";
+  const reel = reels[index];
 
   const video = document.createElement("video");
-  video.src = reels[i].video;
+  video.src = reel.url;
   video.autoplay = true;
   video.loop = true;
-  video.playsInline = true;
+  video.muted = false;
+  video.style.width="100%";
+  video.style.height="100%";
+  video.style.objectFit="cover";
 
-  if (currentVideo) currentVideo.pause();
-  currentVideo = video;
-
-  video.onclick = () => {
+  // Pause / Play
+  video.onclick = ()=>{
     video.paused ? video.play() : video.pause();
   };
 
+  // Caption
   const caption = document.createElement("div");
-  caption.className = "caption";
-  caption.innerText = reels[i].caption;
+  caption.className="caption";
+  caption.innerText = reel.caption;
 
+  // Right buttons
   const actions = document.createElement("div");
-  actions.className = "actions";
+  actions.className="reel-actions";
   actions.innerHTML = `
-    <div>👍</div>
-    <div>💬</div>
-    <div>🔗</div>
+    <button>👍</button>
+    <button>💬</button>
+    <button>🔗</button>
   `;
 
-  reel.appendChild(video);
-  reel.appendChild(caption);
-  reel.appendChild(actions);
-  container.appendChild(reel);
+  reelsBox.appendChild(video);
+  reelsBox.appendChild(caption);
+  reelsBox.appendChild(actions);
 }
 
-// Swipe system
+/* SWIPE */
 let startY = 0;
-
-container.addEventListener("touchstart", e => {
+reelsBox.addEventListener("touchstart",e=>{
   startY = e.touches[0].clientY;
 });
-
-container.addEventListener("touchend", e => {
+reelsBox.addEventListener("touchend",e=>{
   let endY = e.changedTouches[0].clientY;
-  if (endY < startY - 50 && index < reels.length - 1) {
-    index++;
-    loadReel(index);
+  if(endY < startY - 50){
+    currentIndex = (currentIndex+1)%reels.length;
+    showReel(currentIndex);
   }
-  if (endY > startY + 50 && index > 0) {
-    index--;
-    loadReel(index);
+  if(endY > startY + 50){
+    currentIndex = (currentIndex-1+reels.length)%reels.length;
+    showReel(currentIndex);
   }
 });
-
-loadReel(0);
 </script>
 
 </body>
