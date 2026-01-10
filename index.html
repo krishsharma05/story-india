@@ -1,124 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Story Reels</title>
+<title>Story India</title>
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
-}
-body{
-  background:black;
-  color:white;
-  overflow:hidden;
-}
-
-/* Reels container */
-.reels{
-  height:100vh;
-  width:100%;
-  overflow-y:scroll;
-  scroll-snap-type:y mandatory;
-}
-.reels::-webkit-scrollbar{display:none;}
-
-/* Single reel */
-.reel{
-  position:relative;
-  height:100vh;
-  width:100%;
-  scroll-snap-align:start;
-}
-
-/* Video */
-video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* Right buttons */
-.actions{
-  position:absolute;
-  right:15px;
-  bottom:120px;
-  display:flex;
-  flex-direction:column;
-  gap:22px;
-  text-align:center;
-  font-size:14px;
-}
-.actions div{
-  cursor:pointer;
-}
-
-/* Caption */
-.caption{
-  position:absolute;
-  bottom:40px;
-  left:15px;
-  font-size:15px;
-  max-width:70%;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
+<!-- Reels -->
 <div class="reels">
 
-  <!-- Reel 1 -->
   <div class="reel">
-    <video autoplay muted loop playsinline>
-      <source src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4" type="video/mp4">
+    <video muted playsinline>
+      <source src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4">
     </video>
+    <div class="caption">🙏 भारत की प्रेरणादायक कहानी</div>
+  </div>
 
-    <div class="actions">
-      <div>❤️<br>1.2K</div>
-      <div>💬<br>320</div>
-      <div>🔗<br>Share</div>
-    </div>
-
-    <div class="caption">
-      🇮🇳 प्रेरणादायक कहानी <br>
-      #StoryIndia #Motivation
-    </div>
+  <div class="reel">
+    <video muted playsinline>
+      <source src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4">
+    </video>
+    <div class="caption">🔥 संघर्ष से सफलता</div>
   </div>
 
 </div>
 
-<script>
-const videos = document.querySelectorAll("video");
+<!-- Right Actions -->
+<div class="actions">
+  <span>❤️</span>
+  <span>💬</span>
+  <span>🔗</span>
+</div>
 
-videos.forEach(video=>{
-  video.addEventListener("click",()=>{
-    if(video.paused){
-      video.play();
-    }else{
-      video.pause();
-    }
-  });
-});
+<!-- Bottom Navigation -->
+<div class="bottom-nav">
+  <span>Home</span>
+  <span>My List</span>
+  <span>Profile</span>
+</div>
 
-// Auto play only visible video
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    const video = entry.target;
-    if(entry.isIntersecting){
-      video.play();
-    }else{
-      video.pause();
-    }
-  });
-},{threshold:0.6});
-
-videos.forEach(video=>observer.observe(video));
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
