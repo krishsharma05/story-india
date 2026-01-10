@@ -1,39 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Story India Reels</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Story India</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="reels">
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+  <h2>Story India</h2>
+  <p>Home Screen (stories list yahan baad me add hogi)</p>
+</div>
 
-  <div class="reel">
-    <video class="video" loop playsinline>
-      <source src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4" type="video/mp4">
-    </video>
+<!-- REELS PAGE -->
+<div id="reel" class="page">
+  <div class="reels-container">
 
-    <div class="actions">
-      ❤️<span>120</span>
-      💬<span>15</span>
-      🔗<span>Share</span>
+    <div class="reel">
+      <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4"
+             autoplay loop playsinline></video>
+
+      <div class="actions">
+        ❤️<br>Like<br><br>
+        💬<br>Comment<br><br>
+        🔗<br>Share
+      </div>
     </div>
-  </div>
 
-  <div class="reel">
-    <video class="video" loop playsinline>
-      <source src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4" type="video/mp4">
-    </video>
+    <div class="reel">
+      <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4"
+             autoplay loop playsinline></video>
 
-    <div class="actions">
-      ❤️<span>98</span>
-      💬<span>10</span>
-      🔗<span>Share</span>
+      <div class="actions">
+        ❤️<br>Like<br><br>
+        💬<br>Comment<br><br>
+        🔗<br>Share
+      </div>
     </div>
-  </div>
 
+  </div>
+</div>
+
+<!-- MY LIST -->
+<div id="mylist" class="page">
+  <h2>My List</h2>
+  <p>Saved stories yahan aayengi</p>
+</div>
+
+<!-- PROFILE -->
+<div id="profile" class="page">
+  <h2>Profile</h2>
+  <p>User profile page</p>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button onclick="openPage('home')">🏠<br>Home</button>
+  <button onclick="openPage('reel')">🎬<br>Reels</button>
+  <button onclick="openPage('mylist')">🔖<br>My List</button>
+  <button onclick="openPage('profile')">👤<br>Profile</button>
 </div>
 
 <script src="script.js"></script>
