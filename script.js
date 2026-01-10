@@ -1,37 +1,36 @@
 const videos = document.querySelectorAll("video");
-const soundBtns = document.querySelectorAll(".sound-btn");
+let soundEnabled = false;
 
-/* Tap video = pause / play */
-videos.forEach(video=>{
-  video.addEventListener("click",()=>{
+/* First user interaction = enable sound */
+document.body.addEventListener("click", () => {
+  if (!soundEnabled) {
+    videos.forEach(video => {
+      video.muted = false;
+      video.play();
+    });
+    soundEnabled = true;
+    document.querySelectorAll(".sound-btn").forEach(b => b.innerText = "🔊");
+  }
+}, { once: true });
+
+/* Pause / Play on video tap */
+videos.forEach(video => {
+  video.addEventListener("click", (e) => {
+    e.stopPropagation();
     video.paused ? video.play() : video.pause();
   });
 });
 
-/* Sound on / off */
-soundBtns.forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const video = btn.parentElement.querySelector("video");
-    if(video.muted){
-      video.muted = false;
-      btn.innerText = "🔊";
-    }else{
-      video.muted = true;
-      btn.innerText = "🔇";
-    }
-  });
-});
-
-/* Autoplay only visible reel */
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
+/* Autoplay visible reel */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
     const video = entry.target;
-    if(entry.isIntersecting){
+    if (entry.isIntersecting) {
       video.play();
-    }else{
+    } else {
       video.pause();
     }
   });
-},{ threshold:0.6 });
+}, { threshold: 0.6 });
 
-videos.forEach(video=>observer.observe(video));
+videos.forEach(video => observer.observe(video));
