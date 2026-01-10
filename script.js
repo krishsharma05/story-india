@@ -1,42 +1,28 @@
-function showPage(pageId, el){
+function openPage(id, el){
   document.querySelectorAll('.page').forEach(p=>{
     p.classList.remove('active');
   });
+  document.getElementById(id).classList.add('active');
 
-  document.querySelectorAll('.nav-item').forEach(n=>{
+  document.querySelectorAll('.nav').forEach(n=>{
     n.classList.remove('active');
   });
-
-  document.getElementById(pageId).classList.add('active');
   el.classList.add('active');
 }
 
-/* VIDEO PLAY / PAUSE ON TAP */
-document.querySelectorAll('video').forEach(video=>{
-  video.muted = false;
-  video.volume = 1;
-
-  video.addEventListener('click', ()=>{
-    if(video.paused){
-      video.play();
-    }else{
-      video.pause();
-    }
-  });
-});
-
-/* Auto play only visible reel */
+/* VIDEO PLAY ON VIEW */
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     const video = entry.target;
     if(entry.isIntersecting){
+      video.muted = false;
       video.play();
     }else{
       video.pause();
     }
   });
-},{ threshold:0.6 });
+},{ threshold:0.7 });
 
-document.querySelectorAll('.reel video').forEach(v=>{
+document.querySelectorAll('video').forEach(v=>{
   observer.observe(v);
 });
