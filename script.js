@@ -1,37 +1,42 @@
-const reels = document.querySelectorAll(".reel");
+function showPage(pageId, el){
+  document.querySelectorAll('.page').forEach(p=>{
+    p.classList.remove('active');
+  });
 
-reels.forEach(reel => {
-  const video = reel.querySelector("video");
-  const playIcon = reel.querySelector(".play-icon");
+  document.querySelectorAll('.nav-item').forEach(n=>{
+    n.classList.remove('active');
+  });
 
+  document.getElementById(pageId).classList.add('active');
+  el.classList.add('active');
+}
+
+/* VIDEO PLAY / PAUSE ON TAP */
+document.querySelectorAll('video').forEach(video=>{
   video.muted = false;
+  video.volume = 1;
 
-  // Tap to Play / Pause
-  reel.addEventListener("click", () => {
+  video.addEventListener('click', ()=>{
     if(video.paused){
       video.play();
-      playIcon.style.display = "none";
     }else{
       video.pause();
-      playIcon.style.display = "block";
     }
   });
 });
 
-// Auto play visible reel
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    const video = entry.target.querySelector("video");
-    const playIcon = entry.target.querySelector(".play-icon");
-
+/* Auto play only visible reel */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    const video = entry.target;
     if(entry.isIntersecting){
       video.play();
-      playIcon.style.display = "none";
     }else{
       video.pause();
-      playIcon.style.display = "block";
     }
   });
 },{ threshold:0.6 });
 
-reels.forEach(reel => observer.observe(reel));
+document.querySelectorAll('.reel video').forEach(v=>{
+  observer.observe(v);
+});
