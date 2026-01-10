@@ -1,46 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Story India – Reels</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Story TV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+  <h2 class="title">Story TV Home</h2>
+  <p style="color:#aaa;text-align:center">Home content yaha rahega</p>
+</div>
+
 <!-- REELS PAGE -->
-<div class="page active" id="reel">
+<div id="reels" class="page">
   <div class="reels-container">
 
-    <!-- Reel 1 -->
+    <!-- REEL 1 -->
     <div class="reel">
       <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4"
-             playsinline></video>
-
-      <div class="play-icon">▶</div>
+        autoplay loop playsinline></video>
 
       <div class="actions">
-        ❤️<span>1.2K</span>
-        💬<span>320</span>
-        🔁<span>Share</span>
+        ❤️ <span>1.2K</span><br><br>
+        💬 <span>220</span><br><br>
+        🔗 <span>Share</span>
       </div>
     </div>
 
-    <!-- Reel 2 -->
+    <!-- REEL 2 -->
     <div class="reel">
       <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4"
-             playsinline></video>
-
-      <div class="play-icon">▶</div>
+        autoplay loop playsinline></video>
 
       <div class="actions">
-        ❤️<span>980</span>
-        💬<span>210</span>
-        🔁<span>Share</span>
+        ❤️ <span>980</span><br><br>
+        💬 <span>140</span><br><br>
+        🔗 <span>Share</span>
       </div>
     </div>
 
   </div>
+</div>
+
+<!-- MY LIST -->
+<div id="list" class="page">
+  <h2 class="title">My List</h2>
+</div>
+
+<!-- PROFILE -->
+<div id="profile" class="page">
+  <h2 class="title">Profile</h2>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div class="nav-item active" onclick="showPage('home', this)">🏠<span>Home</span></div>
+  <div class="nav-item" onclick="showPage('reels', this)">🎬<span>Reels</span></div>
+  <div class="nav-item" onclick="showPage('list', this)">🔖<span>My List</span></div>
+  <div class="nav-item" onclick="showPage('profile', this)">👤<span>Profile</span></div>
 </div>
 
 <script src="script.js"></script>
