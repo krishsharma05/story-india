@@ -1,63 +1,37 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story India Reels</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-body{
-  background:black;
-  color:white;
-  overflow:hidden;
-}
+<div class="reels">
 
-.reels{
-  height:100vh;
-  overflow-y:scroll;
-  scroll-snap-type:y mandatory;
-}
-.reels::-webkit-scrollbar{display:none;}
+  <!-- Reel 1 -->
+  <div class="reel">
+    <video autoplay muted loop playsinline>
+      <source src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4" type="video/mp4">
+    </video>
 
-.reel{
-  height:100vh;
-  position:relative;
-  scroll-snap-align:start;
-}
+    <div class="sound-btn">🔊 Tap for Sound</div>
+    <div class="caption">🙏 भारत की प्रेरणादायक कहानी</div>
+  </div>
 
-video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+  <!-- Reel 2 -->
+  <div class="reel">
+    <video muted loop playsinline>
+      <source src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4" type="video/mp4">
+    </video>
 
-/* Caption */
-.caption{
-  position:absolute;
-  bottom:80px;
-  left:15px;
-  font-size:15px;
-}
+    <div class="sound-btn">🔊 Tap for Sound</div>
+    <div class="caption">🔥 संघर्ष से सफलता</div>
+  </div>
 
-/* Right actions */
-.actions{
-  position:absolute;
-  right:15px;
-  bottom:120px;
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-  font-size:22px;
-}
+</div>
 
-/* Sound button */
-.sound-btn{
-  position:absolute;
-  top:20px;
-  right:15px;
-  background:rgba(0,0,0,0.7);
-  padding:8px 12px;
-  border-radius:20px;
-  font-size:14px;
-  cursor:pointer;
-  z-index:10;
-}
+<script src="script.js"></script>
+</body>
+</html>
