@@ -2,45 +2,70 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial;
+  font-family:Arial, sans-serif;
 }
 
 body{
   background:black;
-  height:100vh;
-  overflow:hidden;
+  color:white;
 }
 
-.reels{
+.page{
+  display:none;
+  padding-bottom:70px;
+}
+
+.page.active{
+  display:block;
+}
+
+/* Reels */
+.reels-container{
   height:100vh;
   overflow-y:scroll;
   scroll-snap-type:y mandatory;
 }
-.reels::-webkit-scrollbar{display:none;}
 
 .reel{
-  height:100vh;
   position:relative;
+  height:100vh;
   scroll-snap-align:start;
 }
 
-.video{
+.reel video{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
+/* Right actions */
 .actions{
   position:absolute;
   right:10px;
-  bottom:120px;
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-  font-size:22px;
+  top:40%;
   text-align:center;
+  font-size:14px;
 }
 
-.actions span{
+/* Bottom nav */
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  height:60px;
+  background:#111;
+  display:flex;
+  border-top:1px solid #333;
+}
+
+.bottom-nav button{
+  flex:1;
+  background:none;
+  border:none;
+  color:#aaa;
   font-size:12px;
+}
+
+.bottom-nav button:hover{
+  color:white;
 }
