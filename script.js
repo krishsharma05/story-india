@@ -1,29 +1,24 @@
-const videos = document.querySelectorAll(".video");
-let soundEnabled = false;
-
-/* play only visible reel */
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.play();
-    }else{
-      entry.target.pause();
-    }
+function openPage(pageId){
+  document.querySelectorAll('.page').forEach(p=>{
+    p.classList.remove('active');
   });
-},{ threshold:0.8 });
+  document.getElementById(pageId).classList.add('active');
+}
 
-videos.forEach(video=>{
-  observer.observe(video);
+/* Auto play only visible reel + sound ON */
+const videos = document.querySelectorAll("video");
 
-  video.addEventListener("click", ()=>{
-    if(!soundEnabled){
-      videos.forEach(v=>{
-        v.muted = false;
-        v.volume = 1;
-      });
-      soundEnabled = true;
+videos.forEach(video => {
+  video.muted = false;
+});
+
+document.querySelector('.reels-container').addEventListener('scroll', () => {
+  videos.forEach(video => {
+    const rect = video.getBoundingClientRect();
+    if(rect.top >= 0 && rect.bottom <= window.innerHeight){
+      video.play();
+    } else {
+      video.pause();
     }
-
-    video.paused ? video.play() : video.pause();
   });
 });
