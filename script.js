@@ -1,28 +1,26 @@
 const videos = document.querySelectorAll("video");
 const soundBtns = document.querySelectorAll(".sound-btn");
 
-/* Sound ON button (Laptop + Mobile safe) */
+/* Sound ON button */
 soundBtns.forEach(btn=>{
-  btn.addEventListener("click", (e)=>{
-    e.stopPropagation(); // important
-
+  btn.addEventListener("click", e=>{
+    e.stopPropagation();
     const video = btn.parentElement.querySelector("video");
     video.muted = false;
     video.volume = 1;
     video.play();
-
     btn.innerText = "🔊 Sound ON";
   });
 });
 
-/* Tap video = pause / play */
+/* Pause / Play on tap */
 videos.forEach(video=>{
   video.addEventListener("click", ()=>{
     video.paused ? video.play() : video.pause();
   });
 });
 
-/* Auto play visible reel */
+/* Autoplay only visible reel */
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     const video = entry.target;
@@ -32,6 +30,6 @@ const observer = new IntersectionObserver(entries=>{
       video.pause();
     }
   });
-},{threshold:0.6});
+},{ threshold: 0.7 });
 
 videos.forEach(video=>observer.observe(video));
