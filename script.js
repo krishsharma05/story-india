@@ -1,39 +1,20 @@
-const reels = document.querySelectorAll(".reel");
-let current = 0;
+const videos = document.querySelectorAll("video");
 
-function showReel(index) {
-  reels.forEach((reel, i) => {
-    const video = reel.querySelector("video");
-    if (i === index) {
-      reel.classList.add("active");
+videos.forEach(video=>{
+  video.addEventListener("click",()=>{
+    video.paused ? video.play() : video.pause();
+  });
+});
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    const video = entry.target;
+    if(entry.isIntersecting){
       video.play();
-    } else {
-      reel.classList.remove("active");
+    }else{
       video.pause();
     }
   });
-}
+},{threshold:0.7});
 
-let startY = 0;
-
-document.addEventListener("touchstart", e => {
-  startY = e.touches[0].clientY;
-});
-
-document.addEventListener("touchend", e => {
-  let endY = e.changedTouches[0].clientY;
-  if (startY - endY > 50 && current < reels.length - 1) {
-    current++;
-  } else if (endY - startY > 50 && current > 0) {
-    current--;
-  }
-  showReel(current);
-});
-
-// Tap to pause/play
-document.addEventListener("click", () => {
-  const video = reels[current].querySelector("video");
-  video.paused ? video.play() : video.pause();
-});
-
-showReel(0);
+videos.forEach(video=>observer.observe(video));
