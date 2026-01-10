@@ -1,28 +1,29 @@
-const videos = document.querySelectorAll("video");
+const videos = document.querySelectorAll(".video");
+let soundEnabled = false;
 
-/* First click on video = sound ON */
-videos.forEach(video=>{
-  video.addEventListener("click", ()=>{
-    if(video.muted){
-      video.muted = false;
-      video.volume = 1;
-      video.play();
-    }else{
-      video.paused ? video.play() : video.pause();
-    }
-  });
-});
-
-/* Auto play only visible reel */
+/* play only visible reel */
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
-    const video = entry.target;
     if(entry.isIntersecting){
-      video.play();
+      entry.target.play();
     }else{
-      video.pause();
+      entry.target.pause();
     }
   });
-},{ threshold:0.7 });
+},{ threshold:0.8 });
 
-videos.forEach(video=>observer.observe(video));
+videos.forEach(video=>{
+  observer.observe(video);
+
+  video.addEventListener("click", ()=>{
+    if(!soundEnabled){
+      videos.forEach(v=>{
+        v.muted = false;
+        v.volume = 1;
+      });
+      soundEnabled = true;
+    }
+
+    video.paused ? video.play() : video.pause();
+  });
+});
