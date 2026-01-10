@@ -2,40 +2,39 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial, sans-serif;
+  font-family:Arial;
 }
 
 body{
-  background:black;
+  background:#000;
+  color:#fff;
+}
+
+.app{
+  height:calc(100vh - 60px);
   overflow:hidden;
 }
 
-/* Pages */
 .page{
   display:none;
-  height:100vh;
-  color:white;
+  height:100%;
+  overflow:auto;
+  padding:20px;
 }
 
 .page.active{
   display:block;
 }
 
-.title{
-  text-align:center;
-  padding:20px;
-}
-
 /* REELS */
-.reels-container{
-  height:100vh;
+.reels{
+  height:100%;
   overflow-y:scroll;
   scroll-snap-type:y mandatory;
 }
 
 .reel{
-  height:100vh;
-  position:relative;
+  height:100%;
   scroll-snap-align:start;
 }
 
@@ -45,38 +44,27 @@ body{
   object-fit:cover;
 }
 
-/* Actions */
-.actions{
-  position:absolute;
-  right:10px;
-  bottom:140px;
-  font-size:22px;
-  text-align:center;
-}
-
-/* Bottom Nav */
+/* BOTTOM NAV */
 .bottom-nav{
-  position:fixed;
-  bottom:0;
-  width:100%;
+  height:60px;
   background:#000;
   display:flex;
   justify-content:space-around;
-  padding:8px 0;
+  align-items:center;
   border-top:1px solid #222;
 }
 
-.nav-item{
-  color:#777;
+.nav{
   text-align:center;
   font-size:12px;
+  color:#777;
 }
 
-.nav-item span{
+.nav span{
   display:block;
   font-size:11px;
 }
 
-.nav-item.active{
-  color:white;
+.nav.active{
+  color:#fff;
 }
