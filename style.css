@@ -7,55 +7,76 @@
 
 body{
   background:black;
-  color:white;
-  height:100vh;
   overflow:hidden;
 }
 
-/* Reels Scroll */
+/* Pages */
+.page{
+  display:none;
+  height:100vh;
+  color:white;
+}
+
+.page.active{
+  display:block;
+}
+
+.title{
+  text-align:center;
+  padding:20px;
+}
+
+/* REELS */
 .reels-container{
   height:100vh;
   overflow-y:scroll;
   scroll-snap-type:y mandatory;
 }
 
-/* Single Reel */
 .reel{
-  position:relative;
   height:100vh;
+  position:relative;
   scroll-snap-align:start;
 }
 
-video{
+.reel video{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-/* Center Play Icon */
-.play-icon{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  font-size:60px;
-  display:none;
-  opacity:0.8;
-}
-
-/* Right Side Buttons */
+/* Actions */
 .actions{
   position:absolute;
-  right:15px;
-  bottom:120px;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
+  right:10px;
+  bottom:140px;
   font-size:22px;
+  text-align:center;
 }
 
-.actions span{
-  font-size:12px;
-  display:block;
+/* Bottom Nav */
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:#000;
+  display:flex;
+  justify-content:space-around;
+  padding:8px 0;
+  border-top:1px solid #222;
+}
+
+.nav-item{
+  color:#777;
   text-align:center;
+  font-size:12px;
+}
+
+.nav-item span{
+  display:block;
+  font-size:11px;
+}
+
+.nav-item.active{
+  color:white;
 }
