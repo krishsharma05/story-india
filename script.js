@@ -1,41 +1,37 @@
-const container = document.querySelector(".reels-container");
-const videos = document.querySelectorAll(".reel video");
+const reels = document.querySelectorAll(".reel");
 
-let unlocked = false;
+reels.forEach(reel => {
+  const video = reel.querySelector("video");
+  const playIcon = reel.querySelector(".play-icon");
 
-/* 1️⃣ First user tap unlocks autoplay */
-document.body.addEventListener("click", () => {
-  if (!unlocked) {
-    unlocked = true;
-    videos.forEach(v => {
-      v.muted = false;
-      v.play().catch(()=>{});
-    });
-  }
-}, { once: true });
+  video.muted = false;
 
-/* 2️⃣ Scroll par sirf visible reel chale */
-container.addEventListener("scroll", () => {
-  if (!unlocked) return;
-
-  videos.forEach(video => {
-    const rect = video.getBoundingClientRect();
-    if (rect.top >= 0 && rect.bottom <= window.innerHeight + 20) {
-      video.play().catch(()=>{});
-    } else {
-      video.pause();
-    }
-  });
-});
-
-/* 3️⃣ Tap on video = pause / play */
-videos.forEach(video => {
-  video.addEventListener("click", (e) => {
-    e.stopPropagation(); // body click se conflict na ho
-    if (video.paused) {
+  // Tap to Play / Pause
+  reel.addEventListener("click", () => {
+    if(video.paused){
       video.play();
-    } else {
+      playIcon.style.display = "none";
+    }else{
       video.pause();
+      playIcon.style.display = "block";
     }
   });
 });
+
+// Auto play visible reel
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const video = entry.target.querySelector("video");
+    const playIcon = entry.target.querySelector(".play-icon");
+
+    if(entry.isIntersecting){
+      video.play();
+      playIcon.style.display = "none";
+    }else{
+      video.pause();
+      playIcon.style.display = "block";
+    }
+  });
+},{ threshold:0.6 });
+
+reels.forEach(reel => observer.observe(reel));
