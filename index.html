@@ -8,59 +8,49 @@
 </head>
 <body>
 
-<!-- HOME PAGE -->
-<div id="home" class="page active">
-  <h2 class="title">Story TV Home</h2>
-  <p style="color:#aaa;text-align:center">Home content yaha rahega</p>
-</div>
+<div class="app">
 
-<!-- REELS PAGE -->
-<div id="reels" class="page">
-  <div class="reels-container">
-
-    <!-- REEL 1 -->
-    <div class="reel">
-      <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4"
-        autoplay loop playsinline></video>
-
-      <div class="actions">
-        ❤️ <span>1.2K</span><br><br>
-        💬 <span>220</span><br><br>
-        🔗 <span>Share</span>
-      </div>
-    </div>
-
-    <!-- REEL 2 -->
-    <div class="reel">
-      <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4"
-        autoplay loop playsinline></video>
-
-      <div class="actions">
-        ❤️ <span>980</span><br><br>
-        💬 <span>140</span><br><br>
-        🔗 <span>Share</span>
-      </div>
-    </div>
-
+  <!-- HOME -->
+  <div id="home" class="page active">
+    <h2>Home</h2>
+    <p>Home content yaha rahega</p>
   </div>
-</div>
 
-<!-- MY LIST -->
-<div id="list" class="page">
-  <h2 class="title">My List</h2>
-</div>
+  <!-- REELS -->
+  <div id="reels" class="page">
+    <div class="reels">
 
-<!-- PROFILE -->
-<div id="profile" class="page">
-  <h2 class="title">Profile</h2>
+      <div class="reel">
+        <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4"
+        autoplay loop playsinline></video>
+      </div>
+
+      <div class="reel">
+        <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4"
+        autoplay loop playsinline></video>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MY LIST -->
+  <div id="list" class="page">
+    <h2>My List</h2>
+  </div>
+
+  <!-- PROFILE -->
+  <div id="profile" class="page">
+    <h2>Profile</h2>
+  </div>
+
 </div>
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <div class="nav-item active" onclick="showPage('home', this)">🏠<span>Home</span></div>
-  <div class="nav-item" onclick="showPage('reels', this)">🎬<span>Reels</span></div>
-  <div class="nav-item" onclick="showPage('list', this)">🔖<span>My List</span></div>
-  <div class="nav-item" onclick="showPage('profile', this)">👤<span>Profile</span></div>
+  <div class="nav active" onclick="openPage('home',this)">🏠<span>Home</span></div>
+  <div class="nav" onclick="openPage('reels',this)">🎬<span>Reels</span></div>
+  <div class="nav" onclick="openPage('list',this)">🔖<span>My List</span></div>
+  <div class="nav" onclick="openPage('profile',this)">👤<span>Profile</span></div>
 </div>
 
 <script src="script.js"></script>
