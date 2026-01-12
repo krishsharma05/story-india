@@ -2,39 +2,25 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:Arial;
+  font-family:Arial, sans-serif;
 }
 
 body{
-  background:#000;
-  color:#fff;
-}
-
-.app{
-  height:calc(100vh - 60px);
+  background:black;
+  color:white;
   overflow:hidden;
-}
-
-.page{
-  display:none;
-  height:100%;
-  overflow:auto;
-  padding:20px;
-}
-
-.page.active{
-  display:block;
 }
 
 /* REELS */
 .reels{
-  height:100%;
+  height:100vh;
   overflow-y:scroll;
   scroll-snap-type:y mandatory;
 }
 
 .reel{
-  height:100%;
+  height:100vh;
+  position:relative;
   scroll-snap-align:start;
 }
 
@@ -44,27 +30,72 @@ body{
   object-fit:cover;
 }
 
+/* RIGHT ACTIONS */
+.actions{
+  position:absolute;
+  right:12px;
+  bottom:140px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.actions button{
+  background:none;
+  border:none;
+  color:white;
+  font-size:24px;
+  cursor:pointer;
+}
+
+.actions span{
+  font-size:12px;
+}
+
+/* COMMENT BOX */
+.comment-box{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.comment-inner{
+  background:#111;
+  width:85%;
+  padding:20px;
+  border-radius:10px;
+}
+
+.comment-inner textarea{
+  width:100%;
+  height:80px;
+  margin:10px 0;
+  background:#222;
+  border:none;
+  color:white;
+  padding:10px;
+}
+
 /* BOTTOM NAV */
 .bottom-nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
   height:60px;
-  background:#000;
+  background:black;
   display:flex;
   justify-content:space-around;
   align-items:center;
   border-top:1px solid #222;
 }
 
-.nav{
+.bottom-nav div{
   text-align:center;
   font-size:12px;
-  color:#777;
-}
-
-.nav span{
-  display:block;
-  font-size:11px;
-}
-
-.nav.active{
-  color:#fff;
 }
