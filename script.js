@@ -1,37 +1,35 @@
-// LIKE BUTTON
+const home = document.getElementById("home");
+const mylist = document.getElementById("mylist");
+const profile = document.getElementById("profile");
+
+document.getElementById("nav-home").onclick = () => {
+  showPage(home);
+};
+
+document.getElementById("nav-reels").onclick = () => {
+  showPage(home);
+};
+
+document.getElementById("nav-mylist").onclick = () => {
+  showPage(mylist);
+};
+
+document.getElementById("nav-profile").onclick = () => {
+  showPage(profile);
+};
+
+function showPage(page){
+  home.classList.add("hidden");
+  mylist.classList.add("hidden");
+  profile.classList.add("hidden");
+
+  page.classList.remove("hidden");
+}
+
+/* Like */
 document.querySelectorAll('.like').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    let span = btn.querySelector("span");
-    span.innerText = parseInt(span.innerText) + 1;
-  });
-});
-
-// COMMENT
-document.querySelectorAll('.comment').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    alert("Comment feature coming soon");
-  });
-});
-
-// SHARE
-document.querySelectorAll('.share').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    alert("Share feature coming soon");
-  });
-});
-
-// AUTOPLAY / PAUSE ON SCROLL
-const videos = document.querySelectorAll("video");
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.play();
-    }else{
-      entry.target.pause();
-    }
-  });
-},{threshold:0.7});
-
-videos.forEach(video=>{
-  observer.observe(video);
+  btn.onclick=()=>{
+    let span=btn.querySelector("span");
+    span.innerText=parseInt(span.innerText)+1;
+  }
 });
