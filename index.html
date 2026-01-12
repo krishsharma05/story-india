@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Story India - Reels</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Story India</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="reels">
+<!-- HOME / REELS -->
+<div id="home" class="reels">
 
-  <!-- REEL 1 -->
   <div class="reel">
     <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4"
       autoplay loop playsinline></video>
@@ -22,7 +22,6 @@
     </div>
   </div>
 
-  <!-- REEL 2 -->
   <div class="reel">
     <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4"
       autoplay loop playsinline></video>
@@ -36,12 +35,24 @@
 
 </div>
 
+<!-- MY LIST -->
+<div id="mylist" class="page hidden">
+  <h1>⭐ My List</h1>
+  <p>Saved reels will appear here</p>
+</div>
+
+<!-- PROFILE -->
+<div id="profile" class="page hidden">
+  <h1>👤 Profile</h1>
+  <p>User info & settings</p>
+</div>
+
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <div>🏠<br>Home</div>
-  <div>🎬<br>Reels</div>
-  <div>⭐<br>My List</div>
-  <div>👤<br>Profile</div>
+  <div id="nav-home">🏠<br>Home</div>
+  <div id="nav-reels">🎬<br>Reels</div>
+  <div id="nav-mylist">⭐<br>My List</div>
+  <div id="nav-profile">👤<br>Profile</div>
 </div>
 
 <script src="script.js"></script>
