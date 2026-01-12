@@ -1,58 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Story India</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story India</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- HOME / REELS -->
-<div id="home" class="reels">
+<!-- HOME / REELS PAGE -->
+<div id="page-home" class="page">
 
-  <div class="reel">
-    <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4"
-      autoplay loop playsinline></video>
+  <div class="reels">
 
-    <div class="right-actions">
-      <div class="action like">❤️<span>120</span></div>
-      <div class="action comment">💬</div>
-      <div class="action share">📤</div>
+    <div class="reel">
+      <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4"
+        muted autoplay loop playsinline></video>
+
+      <div class="right-actions">
+        <div class="action like">❤️<span>120</span></div>
+        <div class="action comment">💬</div>
+        <div class="action share">📤</div>
+      </div>
     </div>
-  </div>
 
-  <div class="reel">
-    <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4"
-      autoplay loop playsinline></video>
+    <div class="reel">
+      <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4"
+        muted autoplay loop playsinline></video>
 
-    <div class="right-actions">
-      <div class="action like">❤️<span>85</span></div>
-      <div class="action comment">💬</div>
-      <div class="action share">📤</div>
+      <div class="right-actions">
+        <div class="action like">❤️<span>85</span></div>
+        <div class="action comment">💬</div>
+        <div class="action share">📤</div>
+      </div>
     </div>
-  </div>
 
+  </div>
 </div>
 
-<!-- MY LIST -->
-<div id="mylist" class="page hidden">
+<!-- MY LIST PAGE -->
+<div id="page-mylist" class="page hidden">
   <h1>⭐ My List</h1>
-  <p>Saved reels will appear here</p>
+  <p>Saved reels will show here</p>
 </div>
 
-<!-- PROFILE -->
-<div id="profile" class="page hidden">
+<!-- PROFILE PAGE -->
+<div id="page-profile" class="page hidden">
   <h1>👤 Profile</h1>
-  <p>User info & settings</p>
+  <p>User details & settings</p>
 </div>
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <div id="nav-home">🏠<br>Home</div>
-  <div id="nav-reels">🎬<br>Reels</div>
-  <div id="nav-mylist">⭐<br>My List</div>
-  <div id="nav-profile">👤<br>Profile</div>
+  <div onclick="showPage('home')">🏠<br>Home</div>
+  <div onclick="showPage('home')">🎬<br>Reels</div>
+  <div onclick="showPage('mylist')">⭐<br>My List</div>
+  <div onclick="showPage('profile')">👤<br>Profile</div>
 </div>
 
 <script src="script.js"></script>
