@@ -1,15 +1,23 @@
 function showPage(page){
-  document.getElementById("page-home").classList.add("hidden");
-  document.getElementById("page-mylist").classList.add("hidden");
-  document.getElementById("page-profile").classList.add("hidden");
-
-  document.getElementById("page-" + page).classList.remove("hidden");
+  document.querySelectorAll('.page').forEach(p=>{
+    p.classList.add('hidden');
+  });
+  document.getElementById("page-"+page).classList.remove('hidden');
 }
 
-/* Mobile sound fix: tap to unmute */
-document.querySelectorAll("video").forEach(video=>{
-  video.addEventListener("click",()=>{
+/* Reels autoplay + sound enable */
+const reels = document.querySelectorAll(".reel");
+
+reels.forEach(reel=>{
+  const video = reel.querySelector("video");
+  const tap = reel.querySelector(".tap-sound");
+
+  video.muted = true;
+  video.play();
+
+  reel.addEventListener("click",()=>{
     video.muted = false;
     video.play();
+    tap.style.display="none";
   });
 });
