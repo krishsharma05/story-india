@@ -24,32 +24,38 @@ body{
   scroll-snap-align:start;
 }
 
+/* VIDEO */
 .reel video{
   width:100%;
   height:100%;
   object-fit:cover;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:1;
 }
 
-/* RIGHT ACTIONS */
+/* ACTION BUTTONS */
 .actions{
   position:absolute;
-  right:12px;
+  right:15px;
   bottom:140px;
+  z-index:10;
   display:flex;
   flex-direction:column;
   gap:18px;
 }
 
-.actions button{
-  background:none;
-  border:none;
-  color:white;
-  font-size:24px;
+.btn{
+  text-align:center;
+  font-size:26px;
   cursor:pointer;
 }
 
-.actions span{
+.btn span{
+  display:block;
   font-size:12px;
+  margin-top:4px;
 }
 
 /* COMMENT BOX */
@@ -63,6 +69,7 @@ body{
   display:none;
   justify-content:center;
   align-items:center;
+  z-index:20;
 }
 
 .comment-inner{
@@ -93,6 +100,7 @@ body{
   justify-content:space-around;
   align-items:center;
   border-top:1px solid #222;
+  z-index:15;
 }
 
 .bottom-nav div{
