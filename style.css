@@ -11,7 +11,7 @@ body{
   overflow:hidden;
 }
 
-/* Pages */
+/* PAGES */
 .page{
   height:100vh;
 }
@@ -19,7 +19,7 @@ body{
   display:none;
 }
 
-/* Reels */
+/* REELS */
 .reels{
   height:100vh;
   overflow-y:scroll;
@@ -38,7 +38,7 @@ body{
   object-fit:cover;
 }
 
-/* Right side buttons */
+/* RIGHT SIDE BUTTONS */
 .right-actions{
   position:absolute;
   right:14px;
@@ -46,23 +46,29 @@ body{
   display:flex;
   flex-direction:column;
   gap:18px;
+  z-index:10;
 }
 
 .action{
   font-size:26px;
+  text-align:center;
   cursor:pointer;
 }
 
-/* Simple pages */
-#page-mylist,
-#page-profile{
+.action span{
+  display:block;
+  font-size:12px;
+}
+
+/* SIMPLE PAGES */
+#page-mylist, #page-profile{
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
 }
 
-/* Bottom nav */
+/* BOTTOM NAV */
 .bottom-nav{
   position:fixed;
   bottom:0;
@@ -73,10 +79,11 @@ body{
   display:flex;
   justify-content:space-around;
   align-items:center;
+  z-index:20;
 }
 
 .bottom-nav div{
-  text-align:center;
   font-size:12px;
+  text-align:center;
   cursor:pointer;
 }
