@@ -1,35 +1,38 @@
-// LIKE BUTTON
+// LIKE
 document.querySelectorAll('.like').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    let span = btn.querySelector('span');
+  btn.onclick=()=>{
+    let span = btn.querySelector("span");
     span.innerText = parseInt(span.innerText) + 1;
-  });
+  };
 });
 
 // COMMENT
 const commentBox = document.getElementById("commentBox");
 
 document.querySelectorAll('.comment').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    commentBox.style.display = "flex";
-  });
+  btn.onclick = ()=> commentBox.style.display="flex";
 });
 
 function closeComment(){
-  commentBox.style.display = "none";
+  commentBox.style.display="none";
 }
 
 // SHARE
 document.querySelectorAll('.share').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    navigator.clipboard.writeText(window.location.href);
-    alert("Link copied");
+  btn.onclick=()=>{
+    alert("Share feature coming soon");
+  };
+});
+
+// AUTOPLAY + SOUND ON TAP
+document.querySelectorAll("video").forEach(video=>{
+  video.addEventListener("click",()=>{
+    video.muted = false;
+    video.play();
   });
 });
 
-// AUTOPLAY ON SCROLL
-const videos = document.querySelectorAll("video");
-
+// AUTO PLAY ON SCROLL
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting){
@@ -38,8 +41,8 @@ const observer = new IntersectionObserver(entries=>{
       entry.target.pause();
     }
   });
-},{threshold:0.6});
+},{threshold:0.7});
 
-videos.forEach(video=>{
+document.querySelectorAll("video").forEach(video=>{
   observer.observe(video);
 });
