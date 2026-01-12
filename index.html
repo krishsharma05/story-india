@@ -1,56 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Story TV</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Story India - Reels</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="app">
+<div class="reels">
 
-  <!-- HOME -->
-  <div id="home" class="page active">
-    <h2>Home</h2>
-    <p>Home content yaha rahega</p>
-  </div>
+  <!-- REEL 1 -->
+  <div class="reel">
+    <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4"
+      autoplay loop playsinline></video>
 
-  <!-- REELS -->
-  <div id="reels" class="page">
-    <div class="reels">
-
-      <div class="reel">
-        <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767952647/storyindia_ulbwd2.mp4"
-        autoplay loop playsinline></video>
-      </div>
-
-      <div class="reel">
-        <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4"
-        autoplay loop playsinline></video>
-      </div>
-
+    <div class="actions">
+      <button class="like">❤️ <span>120</span></button>
+      <button class="comment">💬</button>
+      <button class="share">📤</button>
     </div>
   </div>
 
-  <!-- MY LIST -->
-  <div id="list" class="page">
-    <h2>My List</h2>
-  </div>
+  <!-- REEL 2 -->
+  <div class="reel">
+    <video src="https://res.cloudinary.com/dttvuuavn/video/upload/v1767955042/storyindia1_znz4aw.mp4"
+      autoplay loop playsinline></video>
 
-  <!-- PROFILE -->
-  <div id="profile" class="page">
-    <h2>Profile</h2>
+    <div class="actions">
+      <button class="like">❤️ <span>85</span></button>
+      <button class="comment">💬</button>
+      <button class="share">📤</button>
+    </div>
   </div>
 
 </div>
 
+<!-- COMMENT BOX -->
+<div class="comment-box" id="commentBox">
+  <div class="comment-inner">
+    <h3>Comments</h3>
+    <textarea placeholder="Write a comment..."></textarea>
+    <button onclick="closeComment()">Close</button>
+  </div>
+</div>
+
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <div class="nav active" onclick="openPage('home',this)">🏠<span>Home</span></div>
-  <div class="nav" onclick="openPage('reels',this)">🎬<span>Reels</span></div>
-  <div class="nav" onclick="openPage('list',this)">🔖<span>My List</span></div>
-  <div class="nav" onclick="openPage('profile',this)">👤<span>Profile</span></div>
+  <div>🏠<br>Home</div>
+  <div>🎬<br>Reels</div>
+  <div>⭐<br>My List</div>
+  <div>👤<br>Profile</div>
 </div>
 
 <script src="script.js"></script>
